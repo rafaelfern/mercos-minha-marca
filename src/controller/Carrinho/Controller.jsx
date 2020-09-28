@@ -14,8 +14,7 @@ function Controller() {
 
   const getItensUsuario = async _ => {
     const responseItens = await api.get('/carrinho');
-    // console.log("response Itens: ",responseItens);
-    setItensUsuarios(responseItens);
+    setItensUsuarios(responseItens.data);
   }
 
   return (

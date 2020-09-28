@@ -9,6 +9,8 @@
   --color-black: #000000;
   --color-border-bottom: #d4d4d4;
   --color-info-adicional: #4c4c4c;
+  --color-item-sku: #7d7d7d;
+  --color-item-qtd: #d2d2d2;
 }
 
 * {
@@ -30,9 +32,9 @@ a {
   color: var(--color-black);
 }
 
-.container {
+/* .container {
   width: 100%;
-}
+} */
 
 header {
   display: flex;

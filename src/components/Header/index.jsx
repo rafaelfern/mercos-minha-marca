@@ -14,6 +14,10 @@ const HeaderContent = styled.div`
   background-color: var(--color-background-header);
   border-bottom: 1px solid var(--color-border-bottom);
 
+  .container-header {
+    width: 100%;
+  }
+
   .content-contato-header {
     display: flex;
     justify-content: space-between; 
@@ -66,7 +70,7 @@ export default function Index() {
   return (
     <>
       <HeaderContent>
-        <Container>
+        <Container className="container-header">
         <Row className="content-contato-header">
           <Col className="icon-text">
             <FaWhatsapp /> &nbsp; (47) 99999-9999
