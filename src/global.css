@@ -1,0 +1,102 @@
+:root {
+  font-size: 60%;
+
+  --color-background-header: #FFFFFF;
+  --color-backgroud-sub-header: #F5F5F5;
+  --color-background: #FFFFFF;
+  --color-button-obs: #E54437;
+  --color-button: #E54435;
+  --color-black: #000000;
+  --color-border-bottom: #d4d4d4;
+  --color-info-adicional: #4c4c4c;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100vh;
+}
+
+body {
+  background: var(--color-background);
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-black);
+}
+
+.container {
+  width: 100%;
+}
+
+header {
+  display: flex;
+  /* align-items: center;
+  justify-content: space-between; */
+  
+  padding-bottom: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 160px;
+  width: 100%;
+  background-color: var(--color-background-header);
+}
+
+.icon-text {
+  display: flex;
+  align-items: center;
+}
+
+.icon-text > svg {
+  height: 100%;
+}
+
+.logo-content {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.search-bar-content {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 10px;
+}
+
+.search-bar-content > .cart-content-icon > svg {
+  color: var(--color-button);
+}
+
+.input-busca-prod {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid var(--color-black);
+}
+
+/* #root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+body,
+input,
+button,
+textarea {
+  font: 500 1.6rem Poppins;
+  color: var(--color-text-base);
+}
+
+@media (min-width: 700px){
+  :root{
+    font-size: 62.5%;
+  }
+}
