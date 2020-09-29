@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, Row } from 'reactstrap';
+import { Card, Col, Row, Spinner } from 'reactstrap';
 import styled from 'styled-components';
 import { FaRegCommentAlt, FaMinus, FaPlus, FaTrash } from 'react-icons/fa';
 
@@ -8,6 +8,7 @@ const CardComponent = styled.div`
   
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   border-bottom: 1px solid var(--color-border-bottom);
   margin-top: 10px;
   margin-bottom: 15px;
@@ -70,21 +71,29 @@ const CardComponent = styled.div`
 
 export default function Index(props) {
   
-  const { id, nome, valorUnitario, quantidade, urlImagem, sku } = props;
+  const { id, nome, valorUnitario, quantidade, urlImagem, sku, incrementaProduto, decrementaProduto, loading } = props;
   
   return (
     <CardComponent>
       <Row className="item-img-content">
-        <Col ><img src={urlImagem} width="90px" height="90"/></Col>
+        <Col ><img src={urlImagem} width="90px" height="90px"/></Col>
       </Row>
       <Row className="item-info-content">
-        <Col><span className="item-nome">Nome do Produto: {nome}</span></Col>
+        <Col><span className="item-nome">{nome}</span></Col>
         <Col><span className="item-sku">SKU {sku}</span></Col>
         <Col><span className="item-comentario icon-text"><FaRegCommentAlt />&nbsp; Adicionar observação</span></Col>
       </Row>
       <Row className="item-qtd-content">
         <Col className="qtd-area">
-          <FaMinus /> &nbsp;&nbsp; <span>{quantidade}</span> &nbsp;&nbsp; <FaPlus style={{color: "var(--color-button)"}} />
+          <FaMinus onClick={() => decrementaProduto(id, quantidade-1)}/>
+          {
+            (loading)
+            ?
+            <Spinner color="primary"/>
+            :
+            <>&nbsp;&nbsp; <span>{quantidade}</span> &nbsp;&nbsp; </>
+          }
+          <FaPlus onClick={() => incrementaProduto(id, quantidade+1)} style={{color: "var(--color-button)"}} />
         </Col>
       </Row>
       <Row className="item-preco-content">

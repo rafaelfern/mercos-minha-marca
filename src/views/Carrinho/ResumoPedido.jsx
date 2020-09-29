@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Button } from 'reactstrap';
+import ModalPagamento from '../../components/ModalPagamento';
 
 const CardContent = styled.div`
   height: 300px;
@@ -66,7 +68,12 @@ const CardContent = styled.div`
 
 `;
 
-export default function ResumoPedido() {
+export default function ResumoPedido(props) {
+  
+  const { checkout, handleCepOnChange, clienteEndereco } = props;
+  const [ modal, setModal ] = useState(false);
+  const toggle = () => setModal(!modal);
+
   return (
     <CardContent>
       <div className="title-content">
@@ -91,8 +98,18 @@ export default function ResumoPedido() {
         <span className="valor">R$ 62.50</span>
       </div>
       <div className="button-content">
-        <button><span>Finalizar a compra</span></button>
+        <Button onClick={() => toggle()}><span>Finalizar a compra</span></Button>
       </div>
+      {
+        (modal)&&
+        <ModalPagamento 
+          modal={modal} 
+          toggle={toggle} 
+          checkout={checkout} 
+          handleCepOnChange={handleCepOnChange}
+          clienteEndereco={clienteEndereco}
+        />
+      }
     </CardContent>
   )
 }

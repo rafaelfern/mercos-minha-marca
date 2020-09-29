@@ -7,32 +7,45 @@ import ListaProdutos from '../../views/Carrinho/ListaProdutos';
 import ResumoPedido from '../../views/Carrinho/ResumoPedido';
 import styled from 'styled-components';
 
-const ContentArea = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-`;
+// const ContentArea = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-around;
+// `;
 
 export default function Page(props) {
-  const { itensUsuarios } = props;
+  const { itensUsuarios, decrementaProduto, incrementaProduto, loading, checkout, handleCepOnChange, clienteEndereco } = props;
   return (
     <>
-      <Header />    
+      <Header />
       <InfoAdicional />  
       <Container fluid={true}>
-        <Row >
-          <PageTitle title="Carrinho" />
-        </Row>
-        <ContentArea> 
-          <Col>  
-            {(itensUsuarios)&&
-              <ListaProdutos itensUsuarios={itensUsuarios}/>
-            }
-          </Col>
+        <Row>
           <Col>
-            <ResumoPedido />
+            <PageTitle title="Carrinho" />
           </Col>
-        </ContentArea>
+        </Row>
+        {/* <ContentArea> */}
+          <Row> 
+            <Col md={6}>
+              {(itensUsuarios)&&
+                <ListaProdutos
+                  itensUsuarios={itensUsuarios} 
+                  incrementaProduto={incrementaProduto} 
+                  decrementaProduto={decrementaProduto} 
+                  loading={loading}
+                />
+              }
+            </Col>
+            <Col md={6}>
+              <ResumoPedido 
+                checkout={checkout} 
+                handleCepOnChange={handleCepOnChange} 
+                clienteEndereco={clienteEndereco}
+              />
+            </Col>
+          </Row>
+        {/* </ContentArea> */}
       </Container>
       
     </>

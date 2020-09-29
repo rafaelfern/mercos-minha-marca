@@ -10,13 +10,8 @@ const HeaderContent = styled.div`
   padding-left: 50px;
   padding-right: 50px;
   height: 160px;
-  width: 100%;
   background-color: var(--color-background-header);
   border-bottom: 1px solid var(--color-border-bottom);
-
-  .container-header {
-    width: 100%;
-  }
 
   .content-contato-header {
     display: flex;
@@ -55,6 +50,11 @@ const HeaderContent = styled.div`
     margin-bottom: 10px;
   }
 
+  .cart-content-icon{
+    display: flex;
+    justify-content: flex-end;
+  }
+    
   .cart-content-icon > span {
     font: 700 14px Roboto;
     line-height: 25px;
@@ -70,21 +70,17 @@ export default function Index() {
   return (
     <>
       <HeaderContent>
-        <Container className="container-header">
+        <Container className="container-header" fluid={true}>
         <Row className="content-contato-header">
           <Col className="icon-text">
             <FaWhatsapp /> &nbsp; (47) 99999-9999
           </Col>
-          <Col className="icon-text">
-            <FaUser /> &nbsp; Arethusa
-            &nbsp;&nbsp;&nbsp;
-            <FaMapMarkerAlt/> &nbsp; Bom Retiro - Joinville, SC
-          </Col>
+          <FaUser /> &nbsp; Arethusa
+          &nbsp;&nbsp;&nbsp;
+          <FaMapMarkerAlt/> &nbsp; Bom Retiro - Joinville, SC
         </Row>
         <Row className="logo-content">
-          <Col>
-            Sua Marca
-          </Col>
+          Sua Marca
         </Row>
         <Row className="search-bar-content">
           <Col className="links-content">

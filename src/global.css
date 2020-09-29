@@ -11,6 +11,8 @@
   --color-info-adicional: #4c4c4c;
   --color-item-sku: #7d7d7d;
   --color-item-qtd: #d2d2d2;
+  --color-title-modal: #404040;
+  --color-label-form: #3c3b3b;
 }
 
 * {
@@ -37,7 +39,7 @@ a {
 } */
 
 header {
-  display: flex;
+  /* display: flex; */
   /* align-items: center;
   justify-content: space-between; */
   
@@ -45,7 +47,7 @@ header {
   padding-left: 20px;
   padding-right: 20px;
   height: 160px;
-  width: 100%;
+  /* width: 100%; */
   background-color: var(--color-background-header);
 }
 
@@ -82,12 +84,6 @@ header {
   border-left: none;
   border-bottom: 1px solid var(--color-black);
 }
-
-/* #root {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-} */
 
 body,
 input,

@@ -22,7 +22,7 @@ export default function Index() {
       {/* <Row> */}
         <Col className="icon-text"><FaTruck />&nbsp;<span>Delivery apenas para Joinville</span></Col>
         <Col className="icon-text"><FaTag />&nbsp;<span>Desconto de 10% nas compras acima de R$ 200,00</span></Col>
-        <Col className="icon-text"><FaCreditCard /><span>Pague em até 12x no cartão</span></Col>
+        <Col className="icon-text"><FaCreditCard />&nbsp;<span>Pague em até 12x no cartão</span></Col>
       {/* </Row> */}
     </InfoAdicional>
   )
