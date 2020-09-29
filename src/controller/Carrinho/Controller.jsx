@@ -24,6 +24,11 @@ function Controller() {
     cvc: '',
   });
   const [ regrasDesconto, setRegrasDesconto ] = useState();
+  const [ itens, setItens ] = useState([]
+    // id: '',
+    // quantidade: '',
+    // observacao: '',
+  );
 
   useEffect(
     () => {
@@ -71,6 +76,11 @@ function Controller() {
       return item.id !== idProduto;
     }))
   }
+console.log("Itens Obs - ",itens)
+  const handleChangeObservacao = (event, idProduto, qtd) => {
+    const { name, value } = event.target;
+    setItens({ ...itens, [idProduto-1]: {...itens[idProduto-1], "id": idProduto, "quantidade":qtd, "observacao": value } });
+  }
 
   const handlePagamento = event => {
     const { name, value } = event.target;
@@ -95,15 +105,32 @@ function Controller() {
       setClienteEndereco({ ...clienteEndereco, [name]: value });
     }
   }
-
+  
   const alteraProdutoQtd = (idProduto, novaQtd) => {
-
+    setItens({...itens, [idProduto-1]: { ...itens[idProduto-1], "id": idProduto, "quantidade": novaQtd } });
     setItensUsuarios({...itensUsuarios, [idProduto-1]: { ...itensUsuarios[idProduto-1], "quantidade": novaQtd } });
-
   }
 
-  const checkout = _ => {
-    // const responseNovaQtd = await api. post('/carrinho', itensObj);
+  const adicionaObs = (idProduto, obsTxt) => {
+    setItens({ ...itens, [idProduto-1]: {...itens[idProduto-1], "observacao": obsTxt } });
+  }
+
+  const checkout = async e => {
+    e.preventDefault();
+    let objPost = {
+      itens,
+      endereco:{
+        "rua": clienteEndereco.logradouro,
+        "bairro": clienteEndereco.bairro,
+        "numero": clienteEndereco.numeroEndereco
+      },
+      clientePagamento: {
+        "numero": clientePagamento.numeroCartao,
+        "cvc": clientePagamento.cvc
+      }
+    }
+    const responseNovaQtd = await api. post('/carrinho', objPost);
+    console.log("response Pt - ",responseNovaQtd);
   }
 
   return (
@@ -120,11 +147,14 @@ function Controller() {
         clienteEndereco={clienteEndereco}
         clientePagamento={clientePagamento}
         handlePagamento={handlePagamento}
-        deletaProduto={deletaProduto}
+        deletaProduto={deletaProduto}itensObj
         disabled={disabled}
         atualizaValorDesconto={atualizaValorDesconto}
         regrasDesconto={regrasDesconto}
         setQuantidadeTotal={setQuantidadeTotal}
+        adicionaObs={adicionaObs}
+        handleChangeObservacao={handleChangeObservacao}
+        itens={itens}
       />
     </>
   )

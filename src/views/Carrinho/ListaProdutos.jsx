@@ -3,13 +3,25 @@ import CardProduto from '../../components/CardProduto';
 
 export default function ListaProdutos(props) {
   
-  const { itensUsuarios, alteraProdutoQtd, deletaProduto, loading, setValorTotalCompra, setDisabled, atualizaValorDesconto, setQuantidadeTotal } = props;
+  const { 
+    itensUsuarios, 
+    alteraProdutoQtd, 
+    deletaProduto, 
+    loading, 
+    setValorTotalCompra, 
+    setDisabled, 
+    atualizaValorDesconto, 
+    setQuantidadeTotal, 
+    adicionaObs,
+    handleChangeObservacao,
+    itens
+  } = props;
   
 
   useEffect(
     () => {
       if(itensUsuarios) calculaValorTotalCompra();
-      atualizaValorDesconto();   
+      atualizaValorDesconto();
     },[itensUsuarios]
   )
 
@@ -40,7 +52,7 @@ export default function ListaProdutos(props) {
 
           let valorProdutoPorQuantidade = item.valor_unitario;
           if(item.quantidade > 1) valorProdutoPorQuantidade = item.valor_unitario * item.quantidade;
-
+          
           return(
             <CardProduto 
               id={item.id} 
@@ -53,6 +65,9 @@ export default function ListaProdutos(props) {
               loading={loading}
               alteraProdutoQtd={alteraProdutoQtd}
               valorProdutoPorQuantidade={valorProdutoPorQuantidade}
+              adicionaObs={adicionaObs}
+              handleChangeObservacao={handleChangeObservacao}
+              itens={itens}
             />
           );
         })

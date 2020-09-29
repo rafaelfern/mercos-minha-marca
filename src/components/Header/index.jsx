@@ -39,6 +39,13 @@ const HeaderContent = styled.div`
     font: 700 14px Roboto;
   }
 
+  input:active,
+  input:focus {
+    background-color: var(--color-background);
+    box-shadow: 0 0 0 0;
+    font: 400 14px Roboto;
+  }
+
   input::placeholder{
     line-height: 20px;
     font: 500 14px Roboto;

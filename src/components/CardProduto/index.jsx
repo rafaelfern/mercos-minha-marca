@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Col, Row, Spinner } from 'reactstrap';
 import styled from 'styled-components';
 import { FaRegCommentAlt, FaMinus, FaPlus, FaTrash } from 'react-icons/fa';
+import ModalObservacao from '../../components/ModalObservacao';
 
 const CardComponent = styled.div`
   height: 115px;
@@ -28,6 +29,7 @@ const CardComponent = styled.div`
     margin-top: 5px;
     color: var(--color-button);
     font: 500 12px Roboto;
+    cursor: pointer;
   }
   .item-info-content {
     margin-right: 20px;
@@ -67,11 +69,31 @@ const CardComponent = styled.div`
     color: var(--color-button);
     cursor: pointer;
   }
+  .item-comentario-feito {
+    color: var(--color-info-adicional);
+    font: 400 12px Roboto;
+  }
 `;
 
 export default function Index(props) {
   
-  const { id, nome, valorUnitario, quantidade, urlImagem, sku, alteraProdutoQtd, loading, valorProduto, valorProdutoPorQuantidade, deletaProduto } = props;
+  const { 
+    id, 
+    nome, 
+    quantidade, 
+    urlImagem, 
+    sku, 
+    alteraProdutoQtd, 
+    loading, 
+    adicionaObs, 
+    valorProdutoPorQuantidade, 
+    deletaProduto,  
+    handleChangeObservacao,
+    itens 
+  } = props;
+
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
 
   return (
     <CardComponent>
@@ -81,7 +103,29 @@ export default function Index(props) {
       <Row className="item-info-content">
         <Col sm={12}><span className="item-nome">{nome}</span></Col>
         <Col sm={12}><span className="item-sku">SKU {sku}</span></Col>
-        <Col sm={12}><span className="item-comentario icon-text"><FaRegCommentAlt />&nbsp; Adicionar observação</span></Col>
+        <Col sm={12}>
+          {
+            (itens[id-1])&&
+              (itens[id-1].observacao)
+              ?
+              <span className="item-comentario-feito"><FaRegCommentAlt />&nbsp;Deixei um comentário nesse produto</span>
+              :
+              <span className="item-comentario icon-text" onClick={() => toggle()}><FaRegCommentAlt />&nbsp; Adicionar observação</span>
+          }
+        </Col>
+        {
+          (modal)&&
+          <ModalObservacao 
+            adicionaObs={adicionaObs} 
+            itens={itens}
+            nome={nome}
+            quantidade={quantidade}
+            modal={modal} 
+            toggle={toggle} 
+            idProduto={id}
+            handleChangeObservacao={handleChangeObservacao}
+          />
+        }
       </Row>
       <Row className="item-qtd-content">
         <Col className="qtd-area">

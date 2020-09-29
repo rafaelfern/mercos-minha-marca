@@ -13,7 +13,8 @@ export default function Page(props) {
     alteraProdutoQtd,
     loading, 
     checkout, 
-    handleCepOnChange, 
+    handleCepOnChange,
+    handleChangeObservacao, 
     clienteEndereco, 
     clientePagamento, 
     handlePagamento,
@@ -24,7 +25,9 @@ export default function Page(props) {
     setDisabled,
     atualizaValorDesconto,
     regrasDesconto,
-    setQuantidadeTotal
+    setQuantidadeTotal,
+    adicionaObs,
+    itens
   } = props;
   
   return (
@@ -52,6 +55,9 @@ export default function Page(props) {
                 setValorTotalCompra={setValorTotalCompra}
                 atualizaValorDesconto={atualizaValorDesconto}
                 setQuantidadeTotal={setQuantidadeTotal}
+                adicionaObs={adicionaObs}
+                handleChangeObservacao={handleChangeObservacao}
+                itens={itens}
               />
             }
           </Col>
