@@ -11,8 +11,9 @@ export default function Page(props) {
 
   const { 
     itensUsuarios, 
-    decrementaProduto, 
-    incrementaProduto, 
+    alteraProdutoQtd,
+    // decrementaProduto, 
+    // incrementaProduto, 
     loading, 
     checkout, 
     handleCepOnChange, 
@@ -37,8 +38,9 @@ export default function Page(props) {
               {(itensUsuarios)&&
                 <ListaProdutos
                   itensUsuarios={itensUsuarios} 
-                  incrementaProduto={incrementaProduto} 
-                  decrementaProduto={decrementaProduto} 
+                  alteraProdutoQtd={alteraProdutoQtd}
+                  // incrementaProduto={incrementaProduto} 
+                  // decrementaProduto={decrementaProduto} 
                   loading={loading}
                 />
               }

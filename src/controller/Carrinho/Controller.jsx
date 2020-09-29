@@ -57,22 +57,21 @@ function Controller() {
     }
   }
 
-  const decrementaProduto = async (idProduto, novaQtd) => {
-    
-    let itensObj = {
-      "id": idProduto,
-      "quantidade": novaQtd,
-      "observacao": ""
-    }
+  const alteraProdutoQtd = (idProduto, novaQtd) => {
 
-    const responseNovaQtd = await api. post('/carrinho', itensObj);
-    // console.log("response - ",responseNovaQtd);
-    // setItensUsuarios()
-  }
-
-  const incrementaProduto = idProduto => {
+    setItensUsuarios({...itensUsuarios, [idProduto-1]: { ...itensUsuarios[idProduto-1], "quantidade": novaQtd } });
 
   }
+
+  // const decrementaProduto = (idProduto, novaQtd) => {
+
+  //   setItensUsuarios({...itensUsuarios, [idProduto-1]: { ...itensUsuarios[idProduto-1], "quantidade": novaQtd } });
+
+  // }
+
+  // const incrementaProduto = (idProduto, novaQtd) => {
+  //   setItensUsuarios({...itensUsuarios, [idProduto-1]: { ...itensUsuarios[idProduto-1], "quantidade": novaQtd }})
+  // }
 
   const checkout = _ => {
     // const responseNovaQtd = await api. post('/carrinho', itensObj);
@@ -82,8 +81,9 @@ function Controller() {
     <>
       <Page 
         itensUsuarios={itensUsuarios} 
-        decrementaProduto={decrementaProduto} 
-        incrementaProduto={incrementaProduto} 
+        alteraProdutoQtd={alteraProdutoQtd}
+        // decrementaProduto={decrementaProduto} 
+        // incrementaProduto={incrementaProduto} 
         loading={loading}
         checkout={checkout}
         handleCepOnChange={handleCepOnChange}

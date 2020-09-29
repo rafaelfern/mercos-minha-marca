@@ -2,7 +2,7 @@ import React from 'react';
 import CardProduto from '../../components/CardProduto';
 
 export default function ListaProdutos(props) {
-  const { itensUsuarios, incrementaProduto, decrementaProduto, loading } = props;
+  const { itensUsuarios, alteraProdutoQtd, loading } = props;
   
   return (
     <>
@@ -15,9 +15,10 @@ export default function ListaProdutos(props) {
             quantidade={item.quantidade} 
             urlImagem={item.url_imagem} 
             sku={item.sku}
-            icrementaProduto={incrementaProduto}
-            decrementaProduto={decrementaProduto} 
+            // icrementaProduto={incrementaProduto}
+            // decrementaProduto={decrementaProduto} 
             loading={loading}
+            alteraProdutoQtd={alteraProdutoQtd}
           />
         ))
       }

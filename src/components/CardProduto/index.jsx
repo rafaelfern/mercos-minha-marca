@@ -71,7 +71,7 @@ const CardComponent = styled.div`
 
 export default function Index(props) {
   
-  const { id, nome, valorUnitario, quantidade, urlImagem, sku, incrementaProduto, decrementaProduto, loading } = props;
+  const { id, nome, valorUnitario, quantidade, urlImagem, sku, alteraProdutoQtd, loading } = props;
   
   return (
     <CardComponent>
@@ -79,13 +79,13 @@ export default function Index(props) {
         <Col ><img src={urlImagem} width="90px" height="90px"/></Col>
       </Row>
       <Row className="item-info-content">
-        <Col><span className="item-nome">{nome}</span></Col>
-        <Col><span className="item-sku">SKU {sku}</span></Col>
-        <Col><span className="item-comentario icon-text"><FaRegCommentAlt />&nbsp; Adicionar observação</span></Col>
+        <Col sm={12}><span className="item-nome">{nome}</span></Col>
+        <Col sm={12}><span className="item-sku">SKU {sku}</span></Col>
+        <Col sm={12}><span className="item-comentario icon-text"><FaRegCommentAlt />&nbsp; Adicionar observação</span></Col>
       </Row>
       <Row className="item-qtd-content">
         <Col className="qtd-area">
-          <FaMinus onClick={() => decrementaProduto(id, quantidade-1)}/>
+          <FaMinus onClick={() => alteraProdutoQtd(id, quantidade-1)}/>
           {
             (loading)
             ?
@@ -93,7 +93,7 @@ export default function Index(props) {
             :
             <>&nbsp;&nbsp; <span>{quantidade}</span> &nbsp;&nbsp; </>
           }
-          <FaPlus onClick={() => incrementaProduto(id, quantidade+1)} style={{color: "var(--color-button)"}} />
+          <FaPlus onClick={() => alteraProdutoQtd(id, quantidade+1)} style={{color: "var(--color-button)"}} />
         </Col>
       </Row>
       <Row className="item-preco-content">
