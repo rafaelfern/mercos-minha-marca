@@ -3,7 +3,7 @@ import CardProduto from '../../components/CardProduto';
 
 export default function ListaProdutos(props) {
   
-  const { itensUsuarios, alteraProdutoQtd, valorProduto, loading, calculaValorProduto, setValorTotalCompra } = props;
+  const { itensUsuarios, alteraProdutoQtd, deletaProduto, loading, setValorTotalCompra } = props;
   
 
   useEffect(
@@ -29,8 +29,7 @@ export default function ListaProdutos(props) {
 
           let valorProdutoPorQuantidade = item.valor_unitario;
           if(item.quantidade > 1) valorProdutoPorQuantidade = item.valor_unitario * item.quantidade;
-          // valorTotal = valorTotal + valorProdutoPorQuantidade; 
-          
+
           return(
             <CardProduto 
               id={item.id} 
@@ -39,11 +38,10 @@ export default function ListaProdutos(props) {
               quantidade={item.quantidade} 
               urlImagem={item.url_imagem} 
               sku={item.sku}
-              // valorProduto={valorProduto}
+              deletaProduto={deletaProduto}
               loading={loading}
               alteraProdutoQtd={alteraProdutoQtd}
               valorProdutoPorQuantidade={valorProdutoPorQuantidade}
-              // valorTotal={valorTotal}
             />
           );
         })

@@ -36,24 +36,15 @@ function Controller() {
     setItensUsuarios(responseItens.data);
     setLoading(false);
   }
+  
+  const deletaProduto = idProduto => {
+    console.log("Id Produto - ",idProduto)
+    setItensUsuarios(itensUsuarios.filter((item, i) => {
+      console.log("ITEMS - ",item.id)
+      return item.id !== idProduto;
+    }))
+  }
 
-  // const calculaValorTotalCompra = _ => {
-  //   let valorTotal = 0;
-  //   if(Object.values(itensUsuarios).length > 0) {
-  //     console.log("itensUsuarios ======",itensUsuarios)
-  //     Object.values(itensUsuarios).map((item, i) => {
-  //       console.log("---",item);
-  //       let valorProdutoPorQuantidade = item.valor_unitario;
-  //       if(item.quantidade > 1) valorProdutoPorQuantidade = item.valor_unitario * item.quantidade;
-  //       console.log('valorProdutoPorQuantidade',valorProdutoPorQuantidade)
-  //       valorTotal = valorTotal + valorProdutoPorQuantidade;
-
-  //     })
-  //   }
-  //   console.log("V T-",valorTotal)
-  //   setValorTotalCompra(valorTotal);
-  // }
-// console.log("ValorTotalCompra = ",valorTotalCompra)
   const handlePagamento = event => {
     const { name, value } = event.target;
     setClientePagamento({ ...clientePagamento, [name]: value });
@@ -113,6 +104,7 @@ function Controller() {
         clienteEndereco={clienteEndereco}
         clientePagamento={clientePagamento}
         handlePagamento={handlePagamento}
+        deletaProduto={deletaProduto}
         // calculaValorProduto={calculaValorProduto}
       />
     </>

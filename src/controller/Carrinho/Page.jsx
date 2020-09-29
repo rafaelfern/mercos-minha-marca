@@ -18,7 +18,8 @@ export default function Page(props) {
     clientePagamento, 
     handlePagamento,
     setValorTotalCompra,
-    valorTotalCompra
+    valorTotalCompra,
+    deletaProduto
   } = props;
   
   return (
@@ -31,31 +32,29 @@ export default function Page(props) {
             <PageTitle title="Carrinho" />
           </Col>
         </Row>
-        {/* <ContentArea> */}
-          <Row> 
-            <Col md={6}>
-              {(itensUsuarios)&&
-                <ListaProdutos
-                  itensUsuarios={itensUsuarios} 
-                  alteraProdutoQtd={alteraProdutoQtd}
-                  // valorProduto={valorProduto}
-                  loading={loading}
-                  // calculaValorProduto={calculaValorProduto}
-                  setValorTotalCompra={setValorTotalCompra}
-                />
-              }
-            </Col>
-            <Col md={6}>
-              <ResumoPedido 
-                checkout={checkout} 
-                handleCepOnChange={handleCepOnChange} 
-                clienteEndereco={clienteEndereco}
-                clientePagamento={clientePagamento}
-                handlePagamento={handlePagamento}
+        <Row> 
+          <Col md={6}>
+            {(itensUsuarios)&&
+              <ListaProdutos
+                itensUsuarios={itensUsuarios} 
+                alteraProdutoQtd={alteraProdutoQtd}
+                deletaProduto={deletaProduto}
+                loading={loading}
+                setValorTotalCompra={setValorTotalCompra}
               />
-            </Col>
-          </Row>
-        {/* </ContentArea> */}
+            }
+          </Col>
+          <Col md={6}>
+            <ResumoPedido
+              checkout={checkout} 
+              handleCepOnChange={handleCepOnChange} 
+              clienteEndereco={clienteEndereco}
+              clientePagamento={clientePagamento}
+              handlePagamento={handlePagamento}
+              valorTotalCompra={valorTotalCompra}
+            />
+          </Col>
+        </Row>
       </Container>
       
     </>

@@ -71,7 +71,7 @@ const CardComponent = styled.div`
 
 export default function Index(props) {
   
-  const { id, nome, valorUnitario, quantidade, urlImagem, sku, alteraProdutoQtd, loading, valorProduto, valorProdutoPorQuantidade, valorTotal } = props;
+  const { id, nome, valorUnitario, quantidade, urlImagem, sku, alteraProdutoQtd, loading, valorProduto, valorProdutoPorQuantidade, deletaProduto } = props;
 
   return (
     <CardComponent>
@@ -98,7 +98,7 @@ export default function Index(props) {
       </Row>
       <Row className="item-preco-content">
         <span>R$ {valorProdutoPorQuantidade}</span>
-        <Col className="item-trash-content"><FaTrash /></Col>
+        <Col className="item-trash-content"><FaTrash onClick={() => deletaProduto(id)} /></Col>
       </Row>
     </CardComponent>
   )
