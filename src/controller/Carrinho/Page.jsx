@@ -19,12 +19,19 @@ export default function Page(props) {
     handlePagamento,
     setValorTotalCompra,
     valorTotalCompra,
-    deletaProduto
+    deletaProduto,
+    disabled,
+    setDisabled,
+    atualizaValorDesconto,
+    regrasDesconto,
   } = props;
   
   return (
     <>
-      <Header valorTotalCompra={valorTotalCompra} />
+      {
+        (valorTotalCompra && regrasDesconto)&&
+        <Header valorTotalCompra={valorTotalCompra} regrasDesconto={regrasDesconto} />
+      }
       <InfoAdicional />  
       <Container fluid={true}>
         <Row>
@@ -40,7 +47,9 @@ export default function Page(props) {
                 alteraProdutoQtd={alteraProdutoQtd}
                 deletaProduto={deletaProduto}
                 loading={loading}
+                setDisabled={setDisabled}
                 setValorTotalCompra={setValorTotalCompra}
+                atualizaValorDesconto={atualizaValorDesconto}
               />
             }
           </Col>
@@ -52,6 +61,7 @@ export default function Page(props) {
               clientePagamento={clientePagamento}
               handlePagamento={handlePagamento}
               valorTotalCompra={valorTotalCompra}
+              disabled={disabled}
             />
           </Col>
         </Row>

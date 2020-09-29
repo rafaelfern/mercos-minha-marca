@@ -70,7 +70,7 @@ const CardContent = styled.div`
 
 export default function ResumoPedido(props) {
   
-  const { checkout, handleCepOnChange, clienteEndereco, clientePagamento, handlePagamento, valorTotalCompra } = props;
+  const { checkout, handleCepOnChange, clienteEndereco, clientePagamento, handlePagamento, valorTotalCompra, disabled } = props;
   const [ modal, setModal ] = useState(false);
   const toggle = () => setModal(!modal);
 
@@ -95,13 +95,19 @@ export default function ResumoPedido(props) {
       </table>
       <div className="total-produtos-content">
         <span>Total</span>
-        {
-          (valorTotalCompra)&&
-          <span className="valor">R$ {valorTotalCompra.toFixed(2)}</span>
-        }
+        
+          
+        <span className="valor">
+          R$ &nbsp;
+          {
+            (valorTotalCompra)&&
+            valorTotalCompra.toFixed(2)
+          }
+        </span>
+        
       </div>
       <div className="button-content">
-        <Button onClick={() => toggle()}><span>Finalizar a compra</span></Button>
+        <Button disabled={disabled} onClick={() => toggle()}><span>Finalizar a compra</span></Button>
       </div>
       {
         (modal)&&

@@ -7,6 +7,7 @@ function Controller() {
 
   const [ itensUsuarios, setItensUsuarios ] = useState([{}]);
   const [ valorTotalCompra, setValorTotalCompra ] = useState();
+  const [ disabled, setDisabled ] = useState(false);
   const [ loading, setLoading ] = useState(true);
   const [ clienteEndereco, setClienteEndereco ] = useState({
     cep: '',
@@ -20,14 +21,14 @@ function Controller() {
   const [ clientePagamento, setClientePagamento ] = useState({
     numeroCartao: '',
     cvc: '',
-  })
+  });
+  const [ regrasDesconto, setRegrasDesconto ] = useState();
 
   useEffect(
     () => {
       getItensUsuario();
-      
-      // calculaValorTotalCompra();
-
+      getRegrasDesconto();
+      // atualizaValorDesconto();
     },[]
   )
 
@@ -37,10 +38,33 @@ function Controller() {
     setLoading(false);
   }
   
+  const getRegrasDesconto = async _ => {
+    const responseDesconto = await api.get('/politicas-comerciais');
+    setRegrasDesconto(responseDesconto.data);
+  }
+
+  const atualizaValorDesconto = _ => {
+    if(regrasDesconto !== undefined) {
+      regrasDesconto.map(( desconto, i) => {
+        if(desconto.tipo === "valor_minimo"){
+          if(valorTotalCompra >= desconto.valor) {
+            aplicaDescontoPercentual(desconto.desconto_percentual);
+          }
+        }
+      })
+    }
+  }
+
+  const aplicaDescontoPercentual = desconto => {
+    let novoValorDesconto = 0;
+    novoValorDesconto = (valorTotalCompra * desconto) / 100;
+    setValorTotalCompra(valorTotalCompra - novoValorDesconto);
+  }
+
+console.log("Regras dwesconto - ",regrasDesconto);
+
   const deletaProduto = idProduto => {
-    console.log("Id Produto - ",idProduto)
     setItensUsuarios(itensUsuarios.filter((item, i) => {
-      console.log("ITEMS - ",item.id)
       return item.id !== idProduto;
     }))
   }
@@ -75,17 +99,6 @@ function Controller() {
 
   }
 
-  // const calculaValorProduto = (idProduto, qty, valorUnitario) => {
-    
-  //   let valor = valorUnitario * qty;
-  //   if(qty === "1"){
-  //     setValorProduto(valorUnitario);
-  //     return;
-  //   }
-  //   setItensUsuarios({...itensUsuarios, [idProduto-1]: { ...itensUsuarios[idProduto-1], "valor_unitario": valor} });
-    
-  // }
-
   const checkout = _ => {
     // const responseNovaQtd = await api. post('/carrinho', itensObj);
   }
@@ -95,8 +108,8 @@ function Controller() {
       <Page 
         itensUsuarios={itensUsuarios} 
         alteraProdutoQtd={alteraProdutoQtd}
-        // valorProduto={valorProduto}
         setValorTotalCompra={setValorTotalCompra}
+        setDisabled={setDisabled}
         valorTotalCompra={valorTotalCompra}
         loading={loading}
         checkout={checkout}
@@ -105,7 +118,9 @@ function Controller() {
         clientePagamento={clientePagamento}
         handlePagamento={handlePagamento}
         deletaProduto={deletaProduto}
-        // calculaValorProduto={calculaValorProduto}
+        disabled={disabled}
+        atualizaValorDesconto={atualizaValorDesconto}
+        regrasDesconto={regrasDesconto}
       />
     </>
   )

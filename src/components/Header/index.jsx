@@ -65,7 +65,7 @@ const HeaderContent = styled.div`
 
 export default function Index(props) {
 
-  const { valorTotalCompra } = props;
+  const { valorTotalCompra, regrasDesconto } = props;
   const [ buscaProduto, setBuscaProduto ] = useState(''); 
 
   return (
@@ -92,9 +92,21 @@ export default function Index(props) {
             <Input className="input-busca-prod" type="text" placeholder="O que você procura?" name="buscaProduto" value={buscaProduto} onChange={(e) => setBuscaProduto(e.target.value) } />
           </Col>
           <Col className="cart-content-icon icon-text">
-            {(valorTotalCompra)&&
-              <><FaShoppingCart />&nbsp; <span>R$ {valorTotalCompra.toFixed(2)}</span></>
-            }
+            
+            <FaShoppingCart />
+            &nbsp; 
+            <span>
+              R$&nbsp; 
+              {
+                (valorTotalCompra)&&
+                valorTotalCompra.toFixed(2)
+              }
+              {/* {
+                (valorTotalCompra >= regrasDesconto[0].valor)&&
+                <>&nbsp;<span style={{ color: "red" }}>{regrasDesconto[0].desconto_percentual} % off</span></>
+              }  */}
+            </span>
+            
           </Col>
           
         </Row>

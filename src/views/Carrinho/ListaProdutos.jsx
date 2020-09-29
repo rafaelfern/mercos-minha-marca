@@ -3,12 +3,13 @@ import CardProduto from '../../components/CardProduto';
 
 export default function ListaProdutos(props) {
   
-  const { itensUsuarios, alteraProdutoQtd, deletaProduto, loading, setValorTotalCompra } = props;
+  const { itensUsuarios, alteraProdutoQtd, deletaProduto, loading, setValorTotalCompra, setDisabled, atualizaValorDesconto } = props;
   
 
   useEffect(
     () => {
       if(itensUsuarios) calculaValorTotalCompra();
+      atualizaValorDesconto();   
     },[itensUsuarios]
   )
 
@@ -19,6 +20,7 @@ export default function ListaProdutos(props) {
       if(item.quantidade > 1) valorProdutoPorQuantidade = item.valor_unitario * item.quantidade;
       valorTotal += valorProdutoPorQuantidade;
     })
+    if(valorTotal === 0) setDisabled(true);
     setValorTotalCompra(valorTotal);
   }
 
