@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Button } from 'reactstrap';
+import { Button, Row, Col, Card, CardBody, CardHeader } from 'reactstrap';
 import ModalPagamento from '../../components/ModalPagamento';
 
 const CardContent = styled.div`
   height: 300px;
-  width: 300px;
-  border: 1px solid var(--color-border-bottom);
+  
+  // border: 1px solid var(--color-border-bottom);
 
   .title-content{
     padding: 10px 20px 10px 20px;
@@ -38,7 +38,10 @@ const CardContent = styled.div`
   }
 
   .total-produtos-content {
-    padding: 0px 20px;
+    margin-top: 20px;
+    padding-right: 0px;
+    padding-left: 0px;
+    // padding: 0px 20px;
     display: flex;
     justify-content: space-between;
     font: 700 16px Roboto;
@@ -46,7 +49,7 @@ const CardContent = styled.div`
   }
 
   .button-content {
-    height: 90px;
+    // height: 90px;
     text-align: center;
     margin: 20px;
   }
@@ -76,51 +79,99 @@ export default function ResumoPedido(props) {
 
   return (
     <CardContent>
-      <div className="title-content">
-        <span>RESUMO DO PEDIDO</span>
-      </div>
-      <table className="table-content">
-        <tr>
-          <td className="atributo">Itens</td>
-          <td className="valor">5</td>
-        </tr>
-        <tr>
-          <td className="atributo">Total em produtos</td>
-          <td className="valor">R$ 62.70</td>
-        </tr>
-        <tr>
-          <td className="atributo">Descontos</td>
-          <td className="valor">R$ 0.00</td>
-        </tr>
-      </table>
-      <div className="total-produtos-content">
-        <span>Total</span>
+      <Card>
+        <CardHeader className="title-content"><span>RESUMO DO PEDIDO</span></CardHeader>
+        <CardBody>
+          <table className="table-content">
+            <tr>
+              <td className="atributo">Itens</td>
+              <td className="valor">5</td>
+            </tr>
+            <tr>
+              <td className="atributo">Total em produtos</td>
+              <td className="valor">R$ 62.70</td>
+            </tr>
+            <tr>
+              <td className="atributo">Descontos</td>
+              <td className="valor">R$ 0.00</td>
+            </tr>
+          </table>
+          <Col className="total-produtos-content">
+            <span>Total</span>
+            
+            <span className="valor">
+              R$ &nbsp;
+              {
+                (valorTotalCompra)&&
+                valorTotalCompra.toFixed(2)
+              }
+            </span>
+            
+          </Col>
+          <div className="button-content">
+            <Button disabled={disabled} onClick={() => toggle()}><span>Finalizar a compra</span></Button>
+          </div>
+          {
+            (modal)&&
+            <ModalPagamento 
+              modal={modal} 
+              toggle={toggle} 
+              checkout={checkout} 
+              handleCepOnChange={handleCepOnChange}
+              clienteEndereco={clienteEndereco}
+              clientePagamento={clientePagamento}
+              handlePagamento={handlePagamento}
+            />
+          }
+        </CardBody>
+      </Card>
+    </CardContent>
+    // <CardContent>
+    //   <div className="title-content">
+    //     <span>RESUMO DO PEDIDO</span>
+    //   </div>
+      // <table className="table-content">
+      //   <tr>
+      //     <td className="atributo">Itens</td>
+      //     <td className="valor">5</td>
+      //   </tr>
+      //   <tr>
+      //     <td className="atributo">Total em produtos</td>
+      //     <td className="valor">R$ 62.70</td>
+      //   </tr>
+      //   <tr>
+      //     <td className="atributo">Descontos</td>
+      //     <td className="valor">R$ 0.00</td>
+      //   </tr>
+      // </table>
+      // <div className="total-produtos-content">
+      //   <span>Total</span>
         
           
-        <span className="valor">
-          R$ &nbsp;
-          {
-            (valorTotalCompra)&&
-            valorTotalCompra.toFixed(2)
-          }
-        </span>
+      //   <span className="valor">
+      //     R$ &nbsp;
+      //     {
+      //       (valorTotalCompra)&&
+      //       valorTotalCompra.toFixed(2)
+      //     }
+      //   </span>
         
-      </div>
-      <div className="button-content">
-        <Button disabled={disabled} onClick={() => toggle()}><span>Finalizar a compra</span></Button>
-      </div>
-      {
-        (modal)&&
-        <ModalPagamento 
-          modal={modal} 
-          toggle={toggle} 
-          checkout={checkout} 
-          handleCepOnChange={handleCepOnChange}
-          clienteEndereco={clienteEndereco}
-          clientePagamento={clientePagamento}
-          handlePagamento={handlePagamento}
-        />
-      }
-    </CardContent>
+      // </div>
+      // <div className="button-content">
+      //   <Button disabled={disabled} onClick={() => toggle()}><span>Finalizar a compra</span></Button>
+      // </div>
+      // {
+      //   (modal)&&
+      //   <ModalPagamento 
+      //     modal={modal} 
+      //     toggle={toggle} 
+      //     checkout={checkout} 
+      //     handleCepOnChange={handleCepOnChange}
+      //     clienteEndereco={clienteEndereco}
+      //     clientePagamento={clientePagamento}
+      //     handlePagamento={handlePagamento}
+      //   />
+      // }
+    // </CardContent>
   )
 }

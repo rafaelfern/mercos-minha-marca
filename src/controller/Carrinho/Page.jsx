@@ -43,8 +43,8 @@ export default function Page(props) {
             <PageTitle title="Carrinho" />
           </Col>
         </Row>
-        <Row> 
-          <Col md={6}>
+        <Row style={{ marginLeft: "50px", marginRight: "50px" }}> 
+          <Col lg={8} style={{marginBottom: "40px" }}>
             {(itensUsuarios)&&
               <ListaProdutos
                 itensUsuarios={itensUsuarios} 
@@ -61,7 +61,7 @@ export default function Page(props) {
               />
             }
           </Col>
-          <Col md={6}>
+          <Col lg={4}>
             <ResumoPedido
               checkout={checkout} 
               handleCepOnChange={handleCepOnChange} 

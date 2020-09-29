@@ -72,6 +72,7 @@ function Controller() {
   }
 
   const deletaProduto = idProduto => {
+    console.log("itensUsuarios = ",itensUsuarios)
     setItensUsuarios(itensUsuarios.filter((item, i) => {
       return item.id !== idProduto;
     }))
@@ -117,18 +118,23 @@ console.log("Itens Obs - ",itens)
 
   const checkout = async e => {
     e.preventDefault();
-    let objPost = {
-      itens,
-      endereco:{
-        "rua": clienteEndereco.logradouro,
-        "bairro": clienteEndereco.bairro,
-        "numero": clienteEndereco.numeroEndereco
-      },
-      clientePagamento: {
-        "numero": clientePagamento.numeroCartao,
-        "cvc": clientePagamento.cvc
-      }
+    let itensObj = {};
+
+    console.log("Itens - ",itens)
+
+    let endereco = {
+      "rua": clienteEndereco.logradouro,
+      "bairro": clienteEndereco.bairro,
+      "numero": parseInt(clienteEndereco.numeroEndereco)
     }
+
+    let cartao = {
+      "numero": clientePagamento.numeroCartao,
+      "cvc": clientePagamento.cvc
+    }
+
+    let objPost = { itensObj, endereco, cartao };
+      
     const responseNovaQtd = await api. post('/carrinho', objPost);
     console.log("response Pt - ",responseNovaQtd);
   }
