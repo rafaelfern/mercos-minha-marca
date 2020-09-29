@@ -24,6 +24,7 @@ export default function Page(props) {
     setDisabled,
     atualizaValorDesconto,
     regrasDesconto,
+    setQuantidadeTotal
   } = props;
   
   return (
@@ -50,6 +51,7 @@ export default function Page(props) {
                 setDisabled={setDisabled}
                 setValorTotalCompra={setValorTotalCompra}
                 atualizaValorDesconto={atualizaValorDesconto}
+                setQuantidadeTotal={setQuantidadeTotal}
               />
             }
           </Col>

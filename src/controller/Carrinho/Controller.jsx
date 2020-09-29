@@ -7,6 +7,7 @@ function Controller() {
 
   const [ itensUsuarios, setItensUsuarios ] = useState([{}]);
   const [ valorTotalCompra, setValorTotalCompra ] = useState();
+  const [ quantidadeTotal, setQuantidadeTotal ] = useState();
   const [ disabled, setDisabled ] = useState(false);
   const [ loading, setLoading ] = useState(true);
   const [ clienteEndereco, setClienteEndereco ] = useState({
@@ -28,7 +29,6 @@ function Controller() {
     () => {
       getItensUsuario();
       getRegrasDesconto();
-      // atualizaValorDesconto();
     },[]
   )
 
@@ -45,9 +45,14 @@ function Controller() {
 
   const atualizaValorDesconto = _ => {
     if(regrasDesconto !== undefined) {
-      regrasDesconto.map(( desconto, i) => {
+      regrasDesconto.map( desconto => {
         if(desconto.tipo === "valor_minimo"){
           if(valorTotalCompra >= desconto.valor) {
+            aplicaDescontoPercentual(desconto.desconto_percentual);
+          }
+        }
+        if(desconto.tipo === "quantidade_itens_minima"){
+          if(quantidadeTotal >= desconto.valor){
             aplicaDescontoPercentual(desconto.desconto_percentual);
           }
         }
@@ -60,8 +65,6 @@ function Controller() {
     novoValorDesconto = (valorTotalCompra * desconto) / 100;
     setValorTotalCompra(valorTotalCompra - novoValorDesconto);
   }
-
-console.log("Regras dwesconto - ",regrasDesconto);
 
   const deletaProduto = idProduto => {
     setItensUsuarios(itensUsuarios.filter((item, i) => {
@@ -121,6 +124,7 @@ console.log("Regras dwesconto - ",regrasDesconto);
         disabled={disabled}
         atualizaValorDesconto={atualizaValorDesconto}
         regrasDesconto={regrasDesconto}
+        setQuantidadeTotal={setQuantidadeTotal}
       />
     </>
   )

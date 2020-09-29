@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Input, Form, FormGroup, Row, Col, Button } from 'reactstrap';
 import styled from 'styled-components';
-import { FaCreditCard } from 'react-icons/fa';
+import { FaCreditCard, FaHome } from 'react-icons/fa';
 
 const ModalContent = styled.div`
 
@@ -58,6 +58,11 @@ export default function Index(props) {
         <ModalHeader toggle={toggle} >Já estamos finalizando!</ModalHeader>
         <ModalBody>
           <Form onSubmit={() => checkout}>
+            <Row className="mb-4 mt-4">
+              <Col md={12}>
+                <span className="info-cartao"><FaHome/> &nbsp; Precisamos do seu endereço pra entregar a compra</span>
+              </Col>
+            </Row>
             <Row className="mt-4">
               <Col md={4}>
                 <FormGroup>
@@ -121,7 +126,7 @@ export default function Index(props) {
               </Col>
               <Col>
                 <FormGroup>
-                  <LabelForm for="cvc">CVC</LabelForm>
+                  <LabelForm for="cvc">CVV</LabelForm>
                   <Input type="number" min="1" max="999" name="cvc" value={clientePagamento.cvc} onChange={e => handlePagamento(e)} />
                 </FormGroup>
               </Col>
