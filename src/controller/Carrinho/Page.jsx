@@ -11,19 +11,19 @@ export default function Page(props) {
   const { 
     itensUsuarios, 
     alteraProdutoQtd,
-    valorProduto, 
     loading, 
     checkout, 
     handleCepOnChange, 
     clienteEndereco, 
     clientePagamento, 
     handlePagamento,
-    calculaValorProduto
+    setValorTotalCompra,
+    valorTotalCompra
   } = props;
   
   return (
     <>
-      <Header />
+      <Header valorTotalCompra={valorTotalCompra} />
       <InfoAdicional />  
       <Container fluid={true}>
         <Row>
@@ -38,9 +38,10 @@ export default function Page(props) {
                 <ListaProdutos
                   itensUsuarios={itensUsuarios} 
                   alteraProdutoQtd={alteraProdutoQtd}
-                  valorProduto={valorProduto}
+                  // valorProduto={valorProduto}
                   loading={loading}
-                  calculaValorProduto={calculaValorProduto}
+                  // calculaValorProduto={calculaValorProduto}
+                  setValorTotalCompra={setValorTotalCompra}
                 />
               }
             </Col>

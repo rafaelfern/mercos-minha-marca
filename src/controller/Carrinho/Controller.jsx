@@ -6,7 +6,7 @@ import * as cep from 'cep-promise';
 function Controller() {
 
   const [ itensUsuarios, setItensUsuarios ] = useState([{}]);
-  const [ valorProduto, setValorProduto ] = useState();
+  const [ valorTotalCompra, setValorTotalCompra ] = useState();
   const [ loading, setLoading ] = useState(true);
   const [ clienteEndereco, setClienteEndereco ] = useState({
     cep: '',
@@ -22,11 +22,12 @@ function Controller() {
     cvc: '',
   })
 
-console.log("itensUsuarios = ",itensUsuarios)
-
   useEffect(
     () => {
       getItensUsuario();
+      
+      // calculaValorTotalCompra();
+
     },[]
   )
 
@@ -36,6 +37,23 @@ console.log("itensUsuarios = ",itensUsuarios)
     setLoading(false);
   }
 
+  // const calculaValorTotalCompra = _ => {
+  //   let valorTotal = 0;
+  //   if(Object.values(itensUsuarios).length > 0) {
+  //     console.log("itensUsuarios ======",itensUsuarios)
+  //     Object.values(itensUsuarios).map((item, i) => {
+  //       console.log("---",item);
+  //       let valorProdutoPorQuantidade = item.valor_unitario;
+  //       if(item.quantidade > 1) valorProdutoPorQuantidade = item.valor_unitario * item.quantidade;
+  //       console.log('valorProdutoPorQuantidade',valorProdutoPorQuantidade)
+  //       valorTotal = valorTotal + valorProdutoPorQuantidade;
+
+  //     })
+  //   }
+  //   console.log("V T-",valorTotal)
+  //   setValorTotalCompra(valorTotal);
+  // }
+// console.log("ValorTotalCompra = ",valorTotalCompra)
   const handlePagamento = event => {
     const { name, value } = event.target;
     setClientePagamento({ ...clientePagamento, [name]: value });
@@ -66,16 +84,16 @@ console.log("itensUsuarios = ",itensUsuarios)
 
   }
 
-  const calculaValorProduto = (idProduto, qty, valorUnitario) => {
+  // const calculaValorProduto = (idProduto, qty, valorUnitario) => {
     
-    let valor = valorUnitario * qty;
-    if(qty === "1"){
-      setValorProduto(valorUnitario);
-      return;
-    }
-    setItensUsuarios({...itensUsuarios, [idProduto-1]: { ...itensUsuarios[idProduto-1], "valor_unitario": valor} });
+  //   let valor = valorUnitario * qty;
+  //   if(qty === "1"){
+  //     setValorProduto(valorUnitario);
+  //     return;
+  //   }
+  //   setItensUsuarios({...itensUsuarios, [idProduto-1]: { ...itensUsuarios[idProduto-1], "valor_unitario": valor} });
     
-  }
+  // }
 
   const checkout = _ => {
     // const responseNovaQtd = await api. post('/carrinho', itensObj);
@@ -86,14 +104,16 @@ console.log("itensUsuarios = ",itensUsuarios)
       <Page 
         itensUsuarios={itensUsuarios} 
         alteraProdutoQtd={alteraProdutoQtd}
-        valorProduto={valorProduto}
+        // valorProduto={valorProduto}
+        setValorTotalCompra={setValorTotalCompra}
+        valorTotalCompra={valorTotalCompra}
         loading={loading}
         checkout={checkout}
         handleCepOnChange={handleCepOnChange}
         clienteEndereco={clienteEndereco}
         clientePagamento={clientePagamento}
         handlePagamento={handlePagamento}
-        calculaValorProduto={calculaValorProduto}
+        // calculaValorProduto={calculaValorProduto}
       />
     </>
   )

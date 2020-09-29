@@ -71,8 +71,8 @@ const CardComponent = styled.div`
 
 export default function Index(props) {
   
-  const { id, nome, valorUnitario, quantidade, urlImagem, sku, alteraProdutoQtd, loading, valorProduto, valorProdutoPorQuantidade } = props;
-  
+  const { id, nome, valorUnitario, quantidade, urlImagem, sku, alteraProdutoQtd, loading, valorProduto, valorProdutoPorQuantidade, valorTotal } = props;
+
   return (
     <CardComponent>
       <Row className="item-img-content">
