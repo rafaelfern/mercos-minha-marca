@@ -1,23 +1,44 @@
 import React from 'react';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Input, Form, FormGroup, Row, Col } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Input, Form, FormGroup, Row, Col, Button } from 'reactstrap';
 import styled from 'styled-components';
-import InputMask from 'react-input-mask';
+import { FaCreditCard } from 'react-icons/fa';
 
 const ModalContent = styled.div`
 
+  .modal-header{
+    background: var(--color-modal-header);
+  }
   .modal-title {
-    font: 700 16px Roboto;
-    color: var(--color-title-modal)
+    font: 700 16px Poppins;
+    color: var(--color-title-modal);
+    text-transform: uppercase;
   }
   input {
     border-radius: 5px;
     margin-top: 5px;
+    height: 40px;
   }
 
   input::placeholder{
     padding-left: 4px;
     font: 400 12px Roboto;
   }
+  
+  .info-cartao {
+    font: 700 15px Poppins;
+    color: var(--color-info-adicional);
+    text-transform: uppercase;
+  }
+
+  .btn-comprar {
+    background: var(--color-button-comprar);
+    width: 140px;
+    height: 40px;
+    font: 700 14px Roboto;
+    text-transform: uppercase;
+    border: none;
+  }
+
 `;
 
 const LabelForm = styled.span`
@@ -28,7 +49,7 @@ const LabelForm = styled.span`
 
 export default function Index(props) {
   
-  const { modal, toggle, checkout, handleCepOnChange, clienteEndereco } = props;
+  const { modal, toggle, checkout, handleCepOnChange, handlePagamento, clientePagamento, clienteEndereco } = props;
 
   return (
     
@@ -37,7 +58,7 @@ export default function Index(props) {
         <ModalHeader toggle={toggle} >Já estamos finalizando!</ModalHeader>
         <ModalBody>
           <Form onSubmit={() => checkout}>
-            <Row>
+            <Row className="mt-4">
               <Col md={4}>
                 <FormGroup>
                   <LabelForm for="cep">Cep</LabelForm><br/>
@@ -85,10 +106,30 @@ export default function Index(props) {
                 </FormGroup>
               </Col>
             </Row>
+            <hr/>
+            <Row className="mb-4">
+              <Col md={12}>
+                <span className="info-cartao"><FaCreditCard/> &nbsp; Informações de Pagamento</span>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <FormGroup> 
+                  <LabelForm for="numeroCartao">Número Cartão</LabelForm>
+                  <Input type="number" name="numeroCartao"  value={clientePagamento.numeroCartao} onChange={e => handlePagamento(e)} />
+                </FormGroup>
+              </Col>
+              <Col>
+                <FormGroup>
+                  <LabelForm for="cvc">CVC</LabelForm>
+                  <Input type="number" min="1" max="999" name="cvc" value={clientePagamento.cvc} onChange={e => handlePagamento(e)} />
+                </FormGroup>
+              </Col>
+            </Row>
           </Form>
         </ModalBody>
         <ModalFooter>
-
+          <Button className="btn-comprar" onClick={() => {}}>Comprar</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>      

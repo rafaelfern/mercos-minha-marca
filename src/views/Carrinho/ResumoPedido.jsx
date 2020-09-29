@@ -70,7 +70,7 @@ const CardContent = styled.div`
 
 export default function ResumoPedido(props) {
   
-  const { checkout, handleCepOnChange, clienteEndereco } = props;
+  const { checkout, handleCepOnChange, clienteEndereco, clientePagamento, handlePagamento } = props;
   const [ modal, setModal ] = useState(false);
   const toggle = () => setModal(!modal);
 
@@ -108,6 +108,8 @@ export default function ResumoPedido(props) {
           checkout={checkout} 
           handleCepOnChange={handleCepOnChange}
           clienteEndereco={clienteEndereco}
+          clientePagamento={clientePagamento}
+          handlePagamento={handlePagamento}
         />
       }
     </CardContent>

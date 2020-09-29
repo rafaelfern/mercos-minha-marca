@@ -7,14 +7,20 @@ import ListaProdutos from '../../views/Carrinho/ListaProdutos';
 import ResumoPedido from '../../views/Carrinho/ResumoPedido';
 import styled from 'styled-components';
 
-// const ContentArea = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-around;
-// `;
-
 export default function Page(props) {
-  const { itensUsuarios, decrementaProduto, incrementaProduto, loading, checkout, handleCepOnChange, clienteEndereco } = props;
+
+  const { 
+    itensUsuarios, 
+    decrementaProduto, 
+    incrementaProduto, 
+    loading, 
+    checkout, 
+    handleCepOnChange, 
+    clienteEndereco, 
+    clientePagamento, 
+    handlePagamento 
+  } = props;
+  
   return (
     <>
       <Header />
@@ -42,6 +48,8 @@ export default function Page(props) {
                 checkout={checkout} 
                 handleCepOnChange={handleCepOnChange} 
                 clienteEndereco={clienteEndereco}
+                clientePagamento={clientePagamento}
+                handlePagamento={handlePagamento}
               />
             </Col>
           </Row>

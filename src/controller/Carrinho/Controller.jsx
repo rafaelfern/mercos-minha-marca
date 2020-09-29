@@ -16,6 +16,10 @@ function Controller() {
     cidade: '',
     uf: '',
   });
+  const [ clientePagamento, setClientePagamento ] = useState({
+    numeroCartao: '',
+    cvc: '',
+  })
 
   useEffect(
     () => {
@@ -27,6 +31,11 @@ function Controller() {
     const responseItens = await api.get('/carrinho');
     setItensUsuarios(responseItens.data);
     setLoading(false);
+  }
+
+  const handlePagamento = event => {
+    const { name, value } = event.target;
+    setClientePagamento({ ...clientePagamento, [name]: value });
   }
 
   const handleCepOnChange = event => {
@@ -79,6 +88,8 @@ function Controller() {
         checkout={checkout}
         handleCepOnChange={handleCepOnChange}
         clienteEndereco={clienteEndereco}
+        clientePagamento={clientePagamento}
+        handlePagamento={handlePagamento}
       />
     </>
   )
