@@ -6,6 +6,7 @@ import * as cep from 'cep-promise';
 function Controller() {
 
   const [ itensUsuarios, setItensUsuarios ] = useState([{}]);
+  const [ valorProduto, setValorProduto ] = useState();
   const [ loading, setLoading ] = useState(true);
   const [ clienteEndereco, setClienteEndereco ] = useState({
     cep: '',
@@ -20,6 +21,8 @@ function Controller() {
     numeroCartao: '',
     cvc: '',
   })
+
+console.log("itensUsuarios = ",itensUsuarios)
 
   useEffect(
     () => {
@@ -63,15 +66,16 @@ function Controller() {
 
   }
 
-  // const decrementaProduto = (idProduto, novaQtd) => {
-
-  //   setItensUsuarios({...itensUsuarios, [idProduto-1]: { ...itensUsuarios[idProduto-1], "quantidade": novaQtd } });
-
-  // }
-
-  // const incrementaProduto = (idProduto, novaQtd) => {
-  //   setItensUsuarios({...itensUsuarios, [idProduto-1]: { ...itensUsuarios[idProduto-1], "quantidade": novaQtd }})
-  // }
+  const calculaValorProduto = (idProduto, qty, valorUnitario) => {
+    
+    let valor = valorUnitario * qty;
+    if(qty === "1"){
+      setValorProduto(valorUnitario);
+      return;
+    }
+    setItensUsuarios({...itensUsuarios, [idProduto-1]: { ...itensUsuarios[idProduto-1], "valor_unitario": valor} });
+    
+  }
 
   const checkout = _ => {
     // const responseNovaQtd = await api. post('/carrinho', itensObj);
@@ -82,14 +86,14 @@ function Controller() {
       <Page 
         itensUsuarios={itensUsuarios} 
         alteraProdutoQtd={alteraProdutoQtd}
-        // decrementaProduto={decrementaProduto} 
-        // incrementaProduto={incrementaProduto} 
+        valorProduto={valorProduto}
         loading={loading}
         checkout={checkout}
         handleCepOnChange={handleCepOnChange}
         clienteEndereco={clienteEndereco}
         clientePagamento={clientePagamento}
         handlePagamento={handlePagamento}
+        calculaValorProduto={calculaValorProduto}
       />
     </>
   )

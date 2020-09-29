@@ -5,21 +5,20 @@ import InfoAdicional from '../../components/InfoAdicional';
 import PageTitle from '../../components/PageTitle';
 import ListaProdutos from '../../views/Carrinho/ListaProdutos';
 import ResumoPedido from '../../views/Carrinho/ResumoPedido';
-import styled from 'styled-components';
 
 export default function Page(props) {
 
   const { 
     itensUsuarios, 
     alteraProdutoQtd,
-    // decrementaProduto, 
-    // incrementaProduto, 
+    valorProduto, 
     loading, 
     checkout, 
     handleCepOnChange, 
     clienteEndereco, 
     clientePagamento, 
-    handlePagamento 
+    handlePagamento,
+    calculaValorProduto
   } = props;
   
   return (
@@ -39,9 +38,9 @@ export default function Page(props) {
                 <ListaProdutos
                   itensUsuarios={itensUsuarios} 
                   alteraProdutoQtd={alteraProdutoQtd}
-                  // incrementaProduto={incrementaProduto} 
-                  // decrementaProduto={decrementaProduto} 
+                  valorProduto={valorProduto}
                   loading={loading}
+                  calculaValorProduto={calculaValorProduto}
                 />
               }
             </Col>
