@@ -40,13 +40,13 @@ const CardComponent = styled.div`
   .qtd-area {
     border 1px solid var(--color-item-qtd);
     height: 35px;
-    width: 140px;
+    // width: 140px;
     border-radius: 4px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-left: 5px;
-    padding-right: 5px;svg:hover 
+    padding-right: 5px; 
   }
   .qtd-area > span {
     font: 500 14px Roboto;
@@ -57,13 +57,16 @@ const CardComponent = styled.div`
   .item-preco-content {
     margin-right: 10px;
   }
-  .item-preco-content > span {
+  .item-preco-content > .item-trash-content > span {
     font: 500 14px Roboto;
   }
   .item-trash-content {
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 15px;
   }
   .item-trash-content > svg {
     color: var(--color-button);
@@ -100,10 +103,11 @@ export default function Index(props) {
       <Row className="item-img-content">
         <Col ><img src={urlImagem} width="90px" height="90px"/></Col>
       </Row>
-      <Row className="item-info-content">
-        <Col sm={12}><span className="item-nome">{nome}</span></Col>
-        <Col sm={12}><span className="item-sku">SKU {sku}</span></Col>
-        <Col sm={12}>
+      
+      <Col className="item-info-content">
+        <Col><span className="item-nome">{nome}</span></Col>
+        <Col><span className="item-sku">SKU {sku}</span></Col>
+        <Col>
           {
             (itens[id-1])&&
               (itens[id-1].observacao)
@@ -113,22 +117,23 @@ export default function Index(props) {
               <span className="item-comentario icon-text" onClick={() => toggle()}><FaRegCommentAlt />&nbsp; Adicionar observação</span>
           }
         </Col>
-        {
-          (modal)&&
-          <ModalObservacao 
-            adicionaObs={adicionaObs} 
-            itens={itens}
-            nome={nome}
-            quantidade={quantidade}
-            modal={modal} 
-            toggle={toggle} 
-            idProduto={id}
-            handleChangeObservacao={handleChangeObservacao}
-          />
-        }
-      </Row>
-      <Row className="item-qtd-content">
-        <Col className="qtd-area">
+      </Col>
+      {
+        (modal)&&
+        <ModalObservacao 
+          adicionaObs={adicionaObs} 
+          itens={itens}
+          nome={nome}
+          quantidade={quantidade}
+          modal={modal} 
+          toggle={toggle} 
+          idProduto={id}
+          handleChangeObservacao={handleChangeObservacao}
+        />
+      }
+      
+      {/* <Row className="item-qtd-content"> */}
+        <Col className="qtd-area item-qtd-content">
           <FaMinus onClick={() => alteraProdutoQtd(id, quantidade-1)}/>
           {
             (loading)
@@ -139,10 +144,13 @@ export default function Index(props) {
           }
           <FaPlus onClick={() => alteraProdutoQtd(id, quantidade+1)} style={{color: "var(--color-button)"}} />
         </Col>
-      </Row>
+      {/* </Row> */}
       <Row className="item-preco-content">
-        <span>R$ {valorProdutoPorQuantidade}</span>
-        <Col className="item-trash-content"><FaTrash onClick={() => deletaProduto(id)} /></Col>
+        <Col className="item-trash-content">
+          <span>R$ {valorProdutoPorQuantidade}</span>
+          
+          <FaTrash onClick={() => deletaProduto(id)} />
+        </Col>
       </Row>
     </CardComponent>
   )

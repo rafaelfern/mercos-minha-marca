@@ -51,7 +51,7 @@ const CardContent = styled.div`
   .button-content {
     // height: 90px;
     text-align: center;
-    margin: 20px;
+    margin-top: 20px;
   }
 
   .button-content > button {
