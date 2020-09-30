@@ -1,8 +1,10 @@
 import React from 'react';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Input, Form, FormGroup, Row, Col, Button } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Input, Form, FormGroup, Row, Col, Button, Spinner } from 'reactstrap';
 import styled from 'styled-components';
 import { FaCreditCard, FaHome } from 'react-icons/fa';
 import InputMask from 'react-input-mask';
+import Lottie from 'react-lottie';
+import * as animationData from '../../assets/4022-success-animation.json';
 
 const ModalContent = styled.div`
 
@@ -50,6 +52,11 @@ const ModalContent = styled.div`
 
 `;
 
+const MensagemSucesso = styled.span`
+  font: 700 19px Poppins; 
+  color: var(--color-button-comprar);
+`;
+
 const LabelForm = styled.span`
   font: 500 14px Roboto;
   margin-botttom: 10px;
@@ -58,7 +65,16 @@ const LabelForm = styled.span`
 
 export default function Index(props) {
   
-  const { modal, toggle, checkout, handleCepOnChange, handlePagamento, clientePagamento, clienteEndereco } = props;
+  const { modal, toggle, checkout, handleCepOnChange, handlePagamento, clientePagamento, animation, clienteEndereco, loadingSave } = props;
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true, 
+    animationData: animationData.default,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  };
 
   return (
     
@@ -67,7 +83,15 @@ export default function Index(props) {
         <Form onSubmit={checkout}>
         <ModalHeader toggle={toggle} >Já estamos finalizando!</ModalHeader>
         <ModalBody>
-          
+          {
+            (animation)
+            ?
+            <Lottie options={defaultOptions}
+              height={400}
+              width={400}
+            />
+            :
+            <>
             <Row className="mb-4 mt-4">
               <Col md={12}>
                 <span className="info-cartao"><FaHome/> &nbsp; Precisamos do seu endereço pra entregar a compra</span>
@@ -143,10 +167,25 @@ export default function Index(props) {
                 <InputMask mask="999" required name="cvc" value={clientePagamento.cvc} onChange={e => handlePagamento(e)} />
               </Col>
             </Row>
-          
+            </>
+          }
         </ModalBody>
         <ModalFooter>
-          <Button className="btn-comprar" type="submit" >Comprar</Button>
+          {
+            (animation)
+            ?
+            <MensagemSucesso>Suas compras foram realizadas com sucesso!</MensagemSucesso>
+            :
+            <Button className="btn-comprar" type="submit" >
+              {
+                (loadingSave)
+                ?
+                <Spinner size="sm" color="primary"/>
+                :
+                <span>Comprar</span>
+              }
+            </Button>
+          }
         </ModalFooter>
         </Form>
       </ModalContent>

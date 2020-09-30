@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Button, Row, Col, Card, CardBody, CardHeader } from 'reactstrap';
 import ModalPagamento from '../../components/ModalPagamento';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CardContent = styled.div`
   height: 300px;
   
-  // border: 1px solid var(--color-border-bottom);
-
   .title-content{
     padding: 10px 20px 10px 20px;
     height: 50px;
@@ -42,7 +42,6 @@ const CardContent = styled.div`
     margin-top: 20px;
     padding-right: 0px;
     padding-left: 0px;
-    // padding: 0px 20px;
     display: flex;
     justify-content: space-between;
     font: 700 16px Roboto;
@@ -50,7 +49,6 @@ const CardContent = styled.div`
   }
 
   .button-content {
-    // height: 90px;
     text-align: center;
     margin-top: 20px;
   }
@@ -74,12 +72,32 @@ const CardContent = styled.div`
 
 export default function ResumoPedido(props) {
   
-  const { checkout, handleCepOnChange, clienteEndereco, clientePagamento, handlePagamento, valorTotalCompra, disabled } = props;
+  const { checkout, handleCepOnChange, clienteEndereco, animation, clientePagamento, loadingSave, handlePagamento, valorTotalCompra, disabled, itens } = props;
   const [ modal, setModal ] = useState(false);
-  const toggle = () => setModal(!modal);
+
+  const toggle = () => {
+    if(Object.values(itens).length === 0){
+      alertError("Escolha mais um item, ou retire, do seu carrinho antes de finalizar :)");
+      return;
+    }
+    setModal(!modal);
+  }
+
+  const alertError = msg => {
+    toast.error(msg, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
 
   return (
     <CardContent>
+      <ToastContainer />
       <Card>
         <CardHeader className="title-content"><span>RESUMO DO PEDIDO</span></CardHeader>
         <CardBody>
@@ -122,57 +140,13 @@ export default function ResumoPedido(props) {
               clienteEndereco={clienteEndereco}
               clientePagamento={clientePagamento}
               handlePagamento={handlePagamento}
+              loadingSave={loadingSave}
+              animation={animation}
             />
           }
         </CardBody>
       </Card>
     </CardContent>
-    // <CardContent>
-    //   <div className="title-content">
-    //     <span>RESUMO DO PEDIDO</span>
-    //   </div>
-      // <table className="table-content">
-      //   <tr>
-      //     <td className="atributo">Itens</td>
-      //     <td className="valor">5</td>
-      //   </tr>
-      //   <tr>
-      //     <td className="atributo">Total em produtos</td>
-      //     <td className="valor">R$ 62.70</td>
-      //   </tr>
-      //   <tr>
-      //     <td className="atributo">Descontos</td>
-      //     <td className="valor">R$ 0.00</td>
-      //   </tr>
-      // </table>
-      // <div className="total-produtos-content">
-      //   <span>Total</span>
-        
-          
-      //   <span className="valor">
-      //     R$ &nbsp;
-      //     {
-      //       (valorTotalCompra)&&
-      //       valorTotalCompra.toFixed(2)
-      //     }
-      //   </span>
-        
-      // </div>
-      // <div className="button-content">
-      //   <Button disabled={disabled} onClick={() => toggle()}><span>Finalizar a compra</span></Button>
-      // </div>
-      // {
-      //   (modal)&&
-      //   <ModalPagamento 
-      //     modal={modal} 
-      //     toggle={toggle} 
-      //     checkout={checkout} 
-      //     handleCepOnChange={handleCepOnChange}
-      //     clienteEndereco={clienteEndereco}
-      //     clientePagamento={clientePagamento}
-      //     handlePagamento={handlePagamento}
-      //   />
-      // }
-    // </CardContent>
+    
   )
 }

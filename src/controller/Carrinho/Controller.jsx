@@ -10,6 +10,7 @@ function Controller() {
   const [ quantidadeTotal, setQuantidadeTotal ] = useState();
   const [ disabled, setDisabled ] = useState(false);
   const [ loading, setLoading ] = useState(true);
+  const [ loadingSave, setLoadingSave ] = useState(false);
   const [ clienteEndereco, setClienteEndereco ] = useState({
     cep: '',
     logradouro: '',
@@ -26,6 +27,7 @@ function Controller() {
   const [ regrasDesconto, setRegrasDesconto ] = useState();
   const [ itens, setItens ] = useState([]);
   const [ valorFiltro, setValorFiltro ] = useState('');
+  const [ animation, setAnimation ] = useState(false);
 
   useEffect(
     () => {
@@ -78,6 +80,9 @@ function Controller() {
   }
 
   const deletaProduto = idProduto => {
+    setItens(Object.values(itens).filter((item, i) => {
+      return item.id !== idProduto;
+    }))
     setItensUsuarios(Object.values(itensUsuarios).filter((item, i) => {
       return item.id !== idProduto;
     }))
@@ -124,12 +129,12 @@ function Controller() {
       setClienteEndereco({ ...clienteEndereco, [name]: value });
     }
   }
-console.log("itensUsuarios ==",itensUsuarios)
-  const alteraProdutoQtd = (idProduto, novaQtd) => {
-    console.log("idProduto - ",idProduto);
-    setItens({...itens, [idProduto-1]: { ...itens[idProduto-1], "id": idProduto, "quantidade": novaQtd } });
+
+  const alteraProdutoQtd = (indexLoop, novaQtd) => {
+    // setItens({...itens, [idProduto-1]: { ...itens[idProduto-1], "id": idProduto, "quantidade": novaQtd } });
     // setItensUsuarios({...itensUsuarios, [idProduto-1]: { ...itensUsuarios[idProduto-1], "quantidade": novaQtd }  });
-    setItensUsuarios({...itensUsuarios, [idProduto]: { ...itensUsuarios[idProduto], "quantidade": novaQtd }  });
+    setItens({...itens, [indexLoop]: { ...itens[indexLoop], "id": indexLoop+1, "quantidade": novaQtd } });
+    setItensUsuarios({...itensUsuarios, [indexLoop]: { ...itensUsuarios[indexLoop], "quantidade": novaQtd }  });
   }
 
   const adicionaObs = (idProduto, obsTxt) => {
@@ -138,7 +143,7 @@ console.log("itensUsuarios ==",itensUsuarios)
 
   const checkout = async e => {
     e.preventDefault();
-    let itensObj = {};
+    setLoadingSave(true);
 
     let endereco = {
       "rua": clienteEndereco.logradouro,
@@ -151,10 +156,14 @@ console.log("itensUsuarios ==",itensUsuarios)
       "cvc": clientePagamento.cvc
     }
 
-    let objPost = { itensObj, endereco, cartao };
-      
-    const responseNovaQtd = await api. post('/carrinho', objPost);
-    console.log("response Pt - ",responseNovaQtd);
+    let objPost = { itens, endereco, cartao };
+    
+    const response = await api. post('/carrinho', objPost);
+
+    if(response.data.id){
+      setAnimation(true);      
+    }
+    setLoadingSave(false);
   }
 
   return (
@@ -180,6 +189,8 @@ console.log("itensUsuarios ==",itensUsuarios)
         handleSearchProduto={handleSearchProduto}
         itens={itens}
         valorFiltro={valorFiltro}
+        loadingSave={loadingSave}
+        animation={animation}
       />
     </>
   )

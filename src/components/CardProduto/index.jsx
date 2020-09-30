@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Col, Row, Spinner } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 import styled from 'styled-components';
 import { FaRegCommentAlt, FaMinus, FaPlus, FaTrash } from 'react-icons/fa';
 import ModalObservacao from '../../components/ModalObservacao';
@@ -86,8 +86,7 @@ export default function Index(props) {
     quantidade, 
     urlImagem, 
     sku, 
-    alteraProdutoQtd, 
-    loading, 
+    alteraProdutoQtd,
     adicionaObs, 
     valorProdutoPorQuantidade, 
     deletaProduto,  
@@ -136,13 +135,7 @@ export default function Index(props) {
       {/* <Row className="item-qtd-content"> */}
         <Col className="qtd-area item-qtd-content">
           <FaMinus onClick={() => alteraProdutoQtd(indexLoop, quantidade-1)}/>
-          {
-            (loading)
-            ?
-            <Spinner color="primary"/>
-            :
-            <>&nbsp;&nbsp; <span>{quantidade}</span> &nbsp;&nbsp; </>
-          }
+          &nbsp;&nbsp; <span>{quantidade}</span> &nbsp;&nbsp;
           <FaPlus onClick={() => alteraProdutoQtd(indexLoop, quantidade+1)} style={{color: "var(--color-button)"}} />
         </Col>
       {/* </Row> */}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Spinner } from 'reactstrap';
 import Header from '../../components/Header';
 import InfoAdicional from '../../components/InfoAdicional';
 import PageTitle from '../../components/PageTitle';
@@ -29,6 +29,8 @@ export default function Page(props) {
     itens,
     valorFiltro,
     handleSearchProduto,
+    loadingSave,
+    animation
   } = props;
   
   return (
@@ -49,6 +51,12 @@ export default function Page(props) {
         <Row style={{ marginLeft: "50px", marginRight: "50px" }}> 
           <Col lg={8} style={{marginBottom: "40px" }}>
             { 
+              (loading)
+              ?
+              <Col className="text-center">
+                <Spinner style={{ width: "4rem", height: "4rem" }} color="primary"/>
+              </Col>
+              :
               (itensUsuarios)&&
               <ListaProdutos
                 itensUsuarios={itensUsuarios} 
@@ -63,7 +71,6 @@ export default function Page(props) {
                 handleChangeObservacao={handleChangeObservacao}
                 itens={itens}
               />
-
             }
           </Col>
           <Col lg={4}>
@@ -75,6 +82,9 @@ export default function Page(props) {
               handlePagamento={handlePagamento}
               valorTotalCompra={valorTotalCompra}
               disabled={disabled}
+              itens={itens}
+              loadingSave={loadingSave}
+              animation={animation}
             />
           </Col>
         </Row>
