@@ -68,6 +68,10 @@ const CardContent = styled.div`
     transform: scale(1.04);
   }
 
+  @media (max-width: 376px){
+    
+  }
+
 `;
 
 export default function ResumoPedido(props) {

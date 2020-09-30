@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Col, Row } from 'reactstrap';
+import { Col, Row, Button } from 'reactstrap';
 import styled from 'styled-components';
 import { FaRegCommentAlt, FaMinus, FaPlus, FaTrash } from 'react-icons/fa';
 import ModalObservacao from '../../components/ModalObservacao';
@@ -60,6 +60,9 @@ const CardComponent = styled.div`
   .item-preco-content > .item-trash-content > span {
     font: 500 14px Roboto;
   }
+  .item-preco-content > .item-trash-content > .botao-excluir-mobile{
+    display:none;
+  }
   .item-trash-content {
     display: flex;
     justify-content: flex-end;
@@ -76,6 +79,48 @@ const CardComponent = styled.div`
     color: var(--color-info-adicional);
     font: 400 12px Roboto;
   }
+
+  @media (max-width: 376px){
+    flex-direction: column;
+    height: auto;
+    margin-bottom: 50px;
+
+    .item-info-content{
+      margin-bottom: 21px;
+    }
+
+    .item-qtd-content {
+      margin-bottom: 21px;
+    }
+
+    .item-qtd-content > svg {
+      width: 30px;
+      height: 30px;
+
+    }
+
+    .item-preco-content > .item-trash-content > span {
+      margin-bottom: 10px;
+    }
+
+    .item-preco-content > .item-trash-content > svg {
+      display: none;
+    }
+
+    .item-preco-content > .item-trash-content > .botao-excluir-mobile {
+      display: grid;
+    }
+
+    .item-preco-content > .item-trash-content > .botao-excluir-mobile > button {
+      background: var(--color-button);
+      border: none;
+      height: 35px;
+      width: 130px;
+      font: 400 16px Roboto;
+    }
+
+  }
+
 `;
 
 export default function Index(props) {
@@ -141,9 +186,15 @@ export default function Index(props) {
       {/* </Row> */}
       <Row className="item-preco-content">
         <Col className="item-trash-content">
+
           <span>R$ {valorProdutoPorQuantidade}</span>
-          
+
+          <Col className="botao-excluir-mobile">
+            <Button onClick={() => deletaProduto(id)}>Excluir</Button>
+          </Col>
+
           <FaTrash onClick={() => deletaProduto(id)} />
+
         </Col>
       </Row>
     </CardComponent>

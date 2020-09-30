@@ -73,6 +73,29 @@ const HeaderContent = styled.div`
     letter-spacing: 0.1px;
   }
   
+  @media (max-width: 376px){
+
+    .logo-content {
+      margin-top: 30px;
+    }
+
+    .search-bar-content {
+      flex-flow: column;
+    }
+
+    .search-bar-content > .cart-content-icon {
+      margin-top: 10px;
+      justify-content: left
+    }
+
+    .content-contato-header, 
+    .search-bar-content > .links-content {
+      display: none;
+    }
+
+
+  }
+
 `;
 
 export default function Index(props) {
