@@ -12,7 +12,11 @@ const HeaderContent = styled.div`
   height: 160px;
   background-color: var(--color-background-header);
   border-bottom: 1px solid var(--color-border-bottom);
-
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index:2;
+  
   .content-contato-header {
     display: flex;
     justify-content: space-between; 
@@ -49,6 +53,7 @@ const HeaderContent = styled.div`
   input::placeholder{
     line-height: 20px;
     font: 500 14px Roboto;
+    color: var(--color-input-placeholder-header);
   }
 
   .logo-content {

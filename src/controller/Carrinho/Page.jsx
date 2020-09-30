@@ -37,7 +37,7 @@ export default function Page(props) {
         <Header valorTotalCompra={valorTotalCompra} regrasDesconto={regrasDesconto} />
       }
       <InfoAdicional />  
-      <Container fluid={true}>
+      <Container  fluid={true}>
         <Row>
           <Col>
             <PageTitle title="Carrinho" />

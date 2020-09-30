@@ -10,6 +10,7 @@ const InfoAdicional = styled.div`
   height: 60px;
   padding: 20px 120px 20px 120px;
   color: var(--color-info-adicional);
+  margin-top: 160px;
 
   span {
     font: 500 12px Roboto;

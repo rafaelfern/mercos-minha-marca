@@ -3,9 +3,9 @@
   --color-background-header: #FFFFFF;
   --color-backgroud-sub-header: #F5F5F5;
   --color-background: #FFFFFF;
-  --color-button-obs: #E54437;
-  --color-button: #E54435;
-  --color-black: #000000;
+  --color-button-obs: #E53935;
+  --color-button: #E53935;
+  --color-black: #212121;
   --color-border-bottom: #d4d4d4;
   --color-info-adicional: #4c4c4c;
   --color-item-sku: #7d7d7d;
@@ -14,6 +14,7 @@
   --color-label-form: #6d6d6d;
   --color-button-comprar: #5DCE63;
   --color-modal-header: #673F91;
+  --color-input-placeholder-header: #BDBDBD
 }
 
 * {
@@ -61,8 +62,6 @@ header {
 .search-bar-content {
   display: flex;
   justify-content: space-between;
-  padding-left: 20px;
-  padding-right: 20px;
   margin-top: 10px;
 }
 

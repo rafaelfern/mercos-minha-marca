@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Input, Row, Col, Button } from 'reactstrap';
 import styled from 'styled-components';
 
+
+
 export default function Index(props) {
   
   const[ obsItem ] = useState("");
@@ -14,7 +16,7 @@ export default function Index(props) {
         <Input type="textarea" name="obsItem" value={itens.observacao} onChange={e => handleChangeObservacao(e, idProduto, quantidade)}/>
       </ModalBody>
       <ModalFooter>
-        <Button className="btn-adiciona-obs" onClick={() => toggle()} >Enviar</Button>
+        <Button color="success" className="btn-adiciona-obs" onClick={() => toggle()} >Enviar</Button>
       </ModalFooter>  
     </Modal>      
   )
