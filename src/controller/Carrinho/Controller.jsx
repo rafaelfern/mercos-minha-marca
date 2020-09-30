@@ -7,6 +7,8 @@ function Controller() {
 
   const [ itensUsuarios, setItensUsuarios ] = useState([{}]);
   const [ valorTotalCompra, setValorTotalCompra ] = useState();
+  const [ valorTotalSemDesc, setValorTotalSemDesc ] = useState();
+  const [ valorDesconto, setValorDesconto ] = useState();
   const [ quantidadeTotal, setQuantidadeTotal ] = useState();
   const [ disabled, setDisabled ] = useState(false);
   const [ loading, setLoading ] = useState(true);
@@ -35,7 +37,7 @@ function Controller() {
       getRegrasDesconto();
     },[valorFiltro]
   )
-
+console.log("valorTotalSemDesc= ",valorTotalSemDesc);
   const getItensUsuario = async _ => {
     let listaFiltrada = [];
     const responseItens = await api.get('/carrinho');
@@ -56,27 +58,35 @@ function Controller() {
     setRegrasDesconto(responseDesconto.data);
   }
 
+  //Aplicação das regras de desconto
   const atualizaValorDesconto = _ => {
     if(regrasDesconto !== undefined) {
-      regrasDesconto.map( desconto => {
-        if(desconto.tipo === "valor_minimo"){
-          if(valorTotalCompra >= desconto.valor) {
-            aplicaDescontoPercentual(desconto.desconto_percentual);
-          }
+      
+      if(valorTotalSemDesc >= regrasDesconto[0].valor) {
+        aplicaDescontoPercentual(regrasDesconto[0].desconto_percentual);
+      }
+    
+      if(quantidadeTotal >= regrasDesconto[1].valor){
+        aplicaDescontoPercentual(regrasDesconto[1].desconto_percentual);
+      }
+
+      if(valorTotalSemDesc >= regrasDesconto[0].valor && quantidadeTotal >= regrasDesconto[1].valor){
+        console.log("qqqqq",regrasDesconto[0].desconto_percentual , regrasDesconto[1].desconto_percentual)
+        if(regrasDesconto[1].desconto_percentual > regrasDesconto[0].desconto_percentual){
+          aplicaDescontoPercentual(regrasDesconto[1].desconto_percentual);
+          return;
         }
-        if(desconto.tipo === "quantidade_itens_minima"){
-          if(quantidadeTotal >= desconto.valor){
-            aplicaDescontoPercentual(desconto.desconto_percentual);
-          }
-        }
-      })
+        aplicaDescontoPercentual(regrasDesconto[0].desconto_percentual);
+      }
+
     }
   }
 
   const aplicaDescontoPercentual = desconto => {
     let novoValorDesconto = 0;
-    novoValorDesconto = (valorTotalCompra * desconto) / 100;
-    setValorTotalCompra(valorTotalCompra - novoValorDesconto);
+    novoValorDesconto = (valorTotalSemDesc * desconto) / 100;
+    setValorDesconto(novoValorDesconto);
+    setValorTotalCompra(valorTotalSemDesc - novoValorDesconto);
   }
 
   const deletaProduto = idProduto => {
@@ -184,6 +194,7 @@ function Controller() {
         disabled={disabled}
         atualizaValorDesconto={atualizaValorDesconto}
         setQuantidadeTotal={setQuantidadeTotal}
+        quantidadeTotal={quantidadeTotal}
         adicionaObs={adicionaObs}
         handleChangeObservacao={handleChangeObservacao}
         handleSearchProduto={handleSearchProduto}
@@ -191,6 +202,9 @@ function Controller() {
         valorFiltro={valorFiltro}
         loadingSave={loadingSave}
         animation={animation}
+        valorTotalSemDesc={valorTotalSemDesc}
+        setValorTotalSemDesc={setValorTotalSemDesc}
+        valorDesconto={valorDesconto}
       />
     </>
   )

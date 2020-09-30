@@ -9,25 +9,24 @@ export default function ListaProdutos(props) {
     deletaProduto, 
     loading, 
     setValorTotalCompra, 
+    valorTotalCompra,
     setDisabled, 
     atualizaValorDesconto, 
     setQuantidadeTotal, 
     adicionaObs,
     handleChangeObservacao,
-    itens
+    itens,
+    setValorTotalSemDesc,
+    valorTotalSemDesc
   } = props;
   
 
   useEffect(
     () => {
       if(itensUsuarios) calculaValorTotalCompra();
-      atualizaValorDesconto();
-    },[itensUsuarios]
+      if(valorTotalSemDesc) atualizaValorDesconto();
+    },[itensUsuarios, valorTotalSemDesc]
   )
-
-  const contaQuantidadeTotal = novaQtd => {
-    setQuantidadeTotal(novaQtd);
-  }
 
   const calculaValorTotalCompra = _ => {
     let valorTotal = 0;
@@ -41,7 +40,8 @@ export default function ListaProdutos(props) {
     })
     
     if(valorTotal === 0) setDisabled(true);
-    contaQuantidadeTotal(qtdTotal);
+    setQuantidadeTotal(qtdTotal);
+    setValorTotalSemDesc(valorTotal);
     setValorTotalCompra(valorTotal);
   }
 

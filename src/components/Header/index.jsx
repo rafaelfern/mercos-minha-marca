@@ -100,7 +100,7 @@ const HeaderContent = styled.div`
 
 export default function Index(props) {
 
-  const { valorTotalCompra, valorFiltro, handleSearchProduto } = props;
+  const { valorTotalCompra, valorFiltro, handleSearchProduto, valorTotalSemDesc } = props;
 
   return (
     <>
@@ -132,8 +132,8 @@ export default function Index(props) {
             <span>
               R$&nbsp;
               {
-                (valorTotalCompra)&&
-                valorTotalCompra.toFixed(2)
+                (valorTotalSemDesc)&&
+                valorTotalSemDesc.toFixed(2)
               }
             </span>
             

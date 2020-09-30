@@ -25,17 +25,22 @@ export default function Page(props) {
     setDisabled,
     atualizaValorDesconto,
     setQuantidadeTotal,
+    quantidadeTotal,
     adicionaObs,
     itens,
     valorFiltro,
     handleSearchProduto,
     loadingSave,
-    animation
+    animation,
+    valorTotalSemDesc,
+    setValorTotalSemDesc,
+    valorDesconto
   } = props;
   
   return (
     <>
       <Header 
+        valorTotalSemDesc={valorTotalSemDesc}
         valorTotalCompra={valorTotalCompra} 
         valorFiltro={valorFiltro}
         handleSearchProduto={handleSearchProduto}
@@ -65,11 +70,14 @@ export default function Page(props) {
                 loading={loading}
                 setDisabled={setDisabled}
                 setValorTotalCompra={setValorTotalCompra}
+                valorTotalCompra={valorTotalCompra}
                 atualizaValorDesconto={atualizaValorDesconto}
                 setQuantidadeTotal={setQuantidadeTotal}
                 adicionaObs={adicionaObs}
                 handleChangeObservacao={handleChangeObservacao}
                 itens={itens}
+                setValorTotalSemDesc={setValorTotalSemDesc}
+                valorTotalSemDesc={valorTotalSemDesc}
               />
             }
           </Col>
@@ -85,6 +93,9 @@ export default function Page(props) {
               itens={itens}
               loadingSave={loadingSave}
               animation={animation}
+              quantidadeTotal={quantidadeTotal}
+              valorTotalSemDesc={valorTotalSemDesc}
+              valorDesconto={valorDesconto}
             />
           </Col>
         </Row>
