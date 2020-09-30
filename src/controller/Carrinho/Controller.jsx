@@ -142,10 +142,10 @@ function Controller() {
   }
 
   const alteraProdutoQtd = (indexLoop, novaQtd) => {
-    // setItens({...itens, [idProduto-1]: { ...itens[idProduto-1], "id": idProduto, "quantidade": novaQtd } });
-    // setItensUsuarios({...itensUsuarios, [idProduto-1]: { ...itensUsuarios[idProduto-1], "quantidade": novaQtd }  });
-    setItens({...itens, [indexLoop]: { ...itens[indexLoop], "id": indexLoop+1, "quantidade": novaQtd } });
-    setItensUsuarios({...itensUsuarios, [indexLoop]: { ...itensUsuarios[indexLoop], "quantidade": novaQtd }  });
+    if(novaQtd >= 1){
+      setItens({...itens, [indexLoop]: { ...itens[indexLoop], "id": indexLoop+1, "quantidade": novaQtd } });
+      setItensUsuarios({...itensUsuarios, [indexLoop]: { ...itensUsuarios[indexLoop], "quantidade": novaQtd }  });
+    }
   }
 
   const adicionaObs = (idProduto, obsTxt) => {

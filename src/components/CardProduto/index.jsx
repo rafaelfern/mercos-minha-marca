@@ -177,13 +177,11 @@ export default function Index(props) {
         />
       }
       
-      {/* <Row className="item-qtd-content"> */}
-        <Col className="qtd-area item-qtd-content">
-          <FaMinus onClick={() => alteraProdutoQtd(indexLoop, quantidade-1)}/>
-          &nbsp;&nbsp; <span>{quantidade}</span> &nbsp;&nbsp;
-          <FaPlus onClick={() => alteraProdutoQtd(indexLoop, quantidade+1)} style={{color: "var(--color-button)"}} />
-        </Col>
-      {/* </Row> */}
+      <Col className="qtd-area item-qtd-content">
+        <FaMinus onClick={() => alteraProdutoQtd(indexLoop, quantidade-1)}/>
+        &nbsp;&nbsp; <span>{quantidade}</span> &nbsp;&nbsp;
+        <FaPlus onClick={() => alteraProdutoQtd(indexLoop, quantidade+1)} style={{color: "var(--color-button)"}} />
+      </Col>
       <Row className="item-preco-content">
         <Col className="item-trash-content">
 
