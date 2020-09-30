@@ -3,6 +3,7 @@ import { Container, Row, Col, Input } from 'reactstrap';
 import { FaWhatsapp, FaUser, FaMapMarkerAlt, FaShoppingCart, FaBars } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import imgLogo from '../../assets/imgs/sua-marca-logo.png';
 
 const HeaderContent = styled.div`
   display: flex;
@@ -57,7 +58,6 @@ const HeaderContent = styled.div`
   }
 
   .logo-content {
-    height: 35px;
     margin-top: 10px;
     margin-bottom: 10px;
   }
@@ -92,7 +92,7 @@ export default function Index(props) {
           <FaMapMarkerAlt/> &nbsp; Bom Retiro - Joinville, SC
         </Row>
         <Row className="logo-content">
-          Sua Marca
+          <img src={imgLogo}/>
         </Row>
         <Row className="search-bar-content">
           <Col className="links-content">

@@ -11,7 +11,8 @@ const TitlePageContent = styled.div`
   span {
     font: 400 32px Montserrat;
     line-height: 40px;
-    letter-spacing: -1.5px;    
+    letter-spacing: -1.5px;
+    color: var(--color-black);   
   }
 `;
 
