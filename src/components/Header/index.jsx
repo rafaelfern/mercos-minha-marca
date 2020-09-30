@@ -73,7 +73,7 @@ const HeaderContent = styled.div`
     letter-spacing: 0.1px;
   }
   
-  @media (max-width: 376px){
+  @media (max-width: 430px){
 
     .logo-content {
       margin-top: 30px;

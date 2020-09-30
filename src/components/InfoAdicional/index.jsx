@@ -16,7 +16,7 @@ const InfoAdicional = styled.div`
     font: 500 12px Roboto;
   }
 
-  @media (max-width: 376px){
+  @media (max-width: 430px){
     
     height: auto;
     flex-direction: column;

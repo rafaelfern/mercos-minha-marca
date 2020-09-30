@@ -80,7 +80,7 @@ const CardComponent = styled.div`
     font: 400 12px Roboto;
   }
 
-  @media (max-width: 376px){
+  @media (max-width: 430px){
     flex-direction: column;
     height: auto;
     margin-bottom: 50px;
