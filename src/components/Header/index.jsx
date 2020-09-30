@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container, Row, Col, Input } from 'reactstrap';
 import { FaWhatsapp, FaUser, FaMapMarkerAlt, FaShoppingCart, FaBars } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -77,8 +77,7 @@ const HeaderContent = styled.div`
 
 export default function Index(props) {
 
-  const { valorTotalCompra, regrasDesconto } = props;
-  const [ buscaProduto, setBuscaProduto ] = useState(''); 
+  const { valorTotalCompra, valorFiltro, handleSearchProduto } = props;
 
   return (
     <>
@@ -101,22 +100,18 @@ export default function Index(props) {
             <Link> OFERTAS </Link>
           </Col>
           <Col>
-            <Input className="input-busca-prod" type="text" placeholder="O que você procura?" name="buscaProduto" value={buscaProduto} onChange={(e) => setBuscaProduto(e.target.value) } />
+            <Input className="input-busca-prod" type="text" placeholder="O que você procura?" name="buscaProduto" value={valorFiltro} onChange={e => handleSearchProduto(e) } />
           </Col>
           <Col className="cart-content-icon icon-text">
             
             <FaShoppingCart />
-            &nbsp; 
+            &nbsp;
             <span>
-              R$&nbsp; 
+              R$&nbsp;
               {
                 (valorTotalCompra)&&
                 valorTotalCompra.toFixed(2)
               }
-              {/* {
-                (valorTotalCompra >= regrasDesconto[0].valor)&&
-                <>&nbsp;<span style={{ color: "red" }}>{regrasDesconto[0].desconto_percentual} % off</span></>
-              }  */}
             </span>
             
           </Col>

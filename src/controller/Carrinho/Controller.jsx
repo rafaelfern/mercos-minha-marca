@@ -24,21 +24,27 @@ function Controller() {
     cvc: '',
   });
   const [ regrasDesconto, setRegrasDesconto ] = useState();
-  const [ itens, setItens ] = useState([]
-    // id: '',
-    // quantidade: '',
-    // observacao: '',
-  );
+  const [ itens, setItens ] = useState([]);
+  const [ valorFiltro, setValorFiltro ] = useState('');
 
   useEffect(
     () => {
       getItensUsuario();
       getRegrasDesconto();
-    },[]
+    },[valorFiltro]
   )
 
   const getItensUsuario = async _ => {
+    let listaFiltrada = [];
     const responseItens = await api.get('/carrinho');
+    
+    if(valorFiltro !== ""){
+      listaFiltrada = filtraLista(responseItens.data);
+      setItensUsuarios(listaFiltrada);
+      setDisabled(false);
+      return;
+    }
+
     setItensUsuarios(responseItens.data);
     setLoading(false);
   }
@@ -72,12 +78,24 @@ function Controller() {
   }
 
   const deletaProduto = idProduto => {
-    console.log("itensUsuarios = ",itensUsuarios)
     setItensUsuarios(itensUsuarios.filter((item, i) => {
       return item.id !== idProduto;
     }))
   }
-console.log("Itens Obs - ",itens)
+
+  const handleSearchProduto = event => {
+    const { name, value } = event.target;
+    setValorFiltro(value);
+  }
+
+  const filtraLista = listaFiltrada => {
+    let items = listaFiltrada;
+    items = items.filter((item,index) => {
+      return item.nome.toLowerCase().search(valorFiltro.toLowerCase()) !== -1;
+    });
+    return items;
+  }
+
   const handleChangeObservacao = (event, idProduto, qtd) => {
     const { name, value } = event.target;
     setItens({ ...itens, [idProduto-1]: {...itens[idProduto-1], "id": idProduto, "quantidade":qtd, "observacao": value } });
@@ -120,8 +138,6 @@ console.log("Itens Obs - ",itens)
     e.preventDefault();
     let itensObj = {};
 
-    console.log("Itens - ",itens)
-
     let endereco = {
       "rua": clienteEndereco.logradouro,
       "bairro": clienteEndereco.bairro,
@@ -141,7 +157,7 @@ console.log("Itens Obs - ",itens)
 
   return (
     <>
-      <Page 
+      <Page
         itensUsuarios={itensUsuarios} 
         alteraProdutoQtd={alteraProdutoQtd}
         setValorTotalCompra={setValorTotalCompra}
@@ -156,11 +172,12 @@ console.log("Itens Obs - ",itens)
         deletaProduto={deletaProduto}itensObj
         disabled={disabled}
         atualizaValorDesconto={atualizaValorDesconto}
-        regrasDesconto={regrasDesconto}
         setQuantidadeTotal={setQuantidadeTotal}
         adicionaObs={adicionaObs}
         handleChangeObservacao={handleChangeObservacao}
+        handleSearchProduto={handleSearchProduto}
         itens={itens}
+        valorFiltro={valorFiltro}
       />
     </>
   )

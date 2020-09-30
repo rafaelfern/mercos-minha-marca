@@ -24,18 +24,21 @@ export default function Page(props) {
     disabled,
     setDisabled,
     atualizaValorDesconto,
-    regrasDesconto,
     setQuantidadeTotal,
     adicionaObs,
-    itens
+    itens,
+    valorFiltro,
+    handleSearchProduto,
   } = props;
   
   return (
     <>
-      {
-        (valorTotalCompra && regrasDesconto)&&
-        <Header valorTotalCompra={valorTotalCompra} regrasDesconto={regrasDesconto} />
-      }
+      <Header 
+        valorTotalCompra={valorTotalCompra} 
+        valorFiltro={valorFiltro}
+        handleSearchProduto={handleSearchProduto}
+      />
+      
       <InfoAdicional />  
       <Container  fluid={true}>
         <Row>
@@ -45,7 +48,8 @@ export default function Page(props) {
         </Row>
         <Row style={{ marginLeft: "50px", marginRight: "50px" }}> 
           <Col lg={8} style={{marginBottom: "40px" }}>
-            {(itensUsuarios)&&
+            { 
+              (itensUsuarios)&&
               <ListaProdutos
                 itensUsuarios={itensUsuarios} 
                 alteraProdutoQtd={alteraProdutoQtd}
@@ -59,6 +63,7 @@ export default function Page(props) {
                 handleChangeObservacao={handleChangeObservacao}
                 itens={itens}
               />
+
             }
           </Col>
           <Col lg={4}>
