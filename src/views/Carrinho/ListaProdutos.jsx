@@ -48,7 +48,7 @@ export default function ListaProdutos(props) {
   return (
     <>
       {
-        Object.values(itensUsuarios).map((item, i) => {
+        Object.values(itensUsuarios).map((item, index) => {
 
           let valorProdutoPorQuantidade = item.valor_unitario;
           if(item.quantidade > 1) valorProdutoPorQuantidade = item.valor_unitario * item.quantidade;
@@ -68,6 +68,7 @@ export default function ListaProdutos(props) {
               adicionaObs={adicionaObs}
               handleChangeObservacao={handleChangeObservacao}
               itens={itens}
+              indexLoop={index}
             />
           );
         })

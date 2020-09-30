@@ -78,7 +78,7 @@ function Controller() {
   }
 
   const deletaProduto = idProduto => {
-    setItensUsuarios(itensUsuarios.filter((item, i) => {
+    setItensUsuarios(Object.values(itensUsuarios).filter((item, i) => {
       return item.id !== idProduto;
     }))
   }
@@ -124,10 +124,12 @@ function Controller() {
       setClienteEndereco({ ...clienteEndereco, [name]: value });
     }
   }
-  
+console.log("itensUsuarios ==",itensUsuarios)
   const alteraProdutoQtd = (idProduto, novaQtd) => {
+    console.log("idProduto - ",idProduto);
     setItens({...itens, [idProduto-1]: { ...itens[idProduto-1], "id": idProduto, "quantidade": novaQtd } });
-    setItensUsuarios({...itensUsuarios, [idProduto-1]: { ...itensUsuarios[idProduto-1], "quantidade": novaQtd } });
+    // setItensUsuarios({...itensUsuarios, [idProduto-1]: { ...itensUsuarios[idProduto-1], "quantidade": novaQtd }  });
+    setItensUsuarios({...itensUsuarios, [idProduto]: { ...itensUsuarios[idProduto], "quantidade": novaQtd }  });
   }
 
   const adicionaObs = (idProduto, obsTxt) => {

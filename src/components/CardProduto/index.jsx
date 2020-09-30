@@ -92,7 +92,8 @@ export default function Index(props) {
     valorProdutoPorQuantidade, 
     deletaProduto,  
     handleChangeObservacao,
-    itens 
+    itens,
+    indexLoop,
   } = props;
 
   const [modal, setModal] = useState(false);
@@ -134,7 +135,7 @@ export default function Index(props) {
       
       {/* <Row className="item-qtd-content"> */}
         <Col className="qtd-area item-qtd-content">
-          <FaMinus onClick={() => alteraProdutoQtd(id, quantidade-1)}/>
+          <FaMinus onClick={() => alteraProdutoQtd(indexLoop, quantidade-1)}/>
           {
             (loading)
             ?
@@ -142,7 +143,7 @@ export default function Index(props) {
             :
             <>&nbsp;&nbsp; <span>{quantidade}</span> &nbsp;&nbsp; </>
           }
-          <FaPlus onClick={() => alteraProdutoQtd(id, quantidade+1)} style={{color: "var(--color-button)"}} />
+          <FaPlus onClick={() => alteraProdutoQtd(indexLoop, quantidade+1)} style={{color: "var(--color-button)"}} />
         </Col>
       {/* </Row> */}
       <Row className="item-preco-content">
