@@ -37,7 +37,7 @@ function Controller() {
       getRegrasDesconto();
     },[valorFiltro]
   )
-console.log("valorTotalSemDesc= ",valorTotalSemDesc);
+
   const getItensUsuario = async _ => {
     let listaFiltrada = [];
     const responseItens = await api.get('/carrinho');

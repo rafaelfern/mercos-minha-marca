@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Button, Row, Col, Card, CardBody, CardHeader } from 'reactstrap';
+import { Button, Col, Card, CardBody, CardHeader } from 'reactstrap';
 import ModalPagamento from '../../components/ModalPagamento';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
