@@ -78,6 +78,7 @@ export default function Page(props) {
                 itens={itens}
                 setValorTotalSemDesc={setValorTotalSemDesc}
                 valorTotalSemDesc={valorTotalSemDesc}
+                valorDesconto={valorDesconto}
               />
             }
           </Col>

@@ -71,7 +71,7 @@ console.log("valorTotalSemDesc= ",valorTotalSemDesc);
       }
 
       if(valorTotalSemDesc >= regrasDesconto[0].valor && quantidadeTotal >= regrasDesconto[1].valor){
-        console.log("qqqqq",regrasDesconto[0].desconto_percentual , regrasDesconto[1].desconto_percentual)
+        
         if(regrasDesconto[1].desconto_percentual > regrasDesconto[0].desconto_percentual){
           aplicaDescontoPercentual(regrasDesconto[1].desconto_percentual);
           return;
@@ -90,12 +90,13 @@ console.log("valorTotalSemDesc= ",valorTotalSemDesc);
   }
 
   const deletaProduto = idProduto => {
-    setItens(Object.values(itens).filter((item, i) => {
+    setItens(Object.values(itens).filter(item => {
       return item.id !== idProduto;
     }))
-    setItensUsuarios(Object.values(itensUsuarios).filter((item, i) => {
+    setItensUsuarios(Object.values(itensUsuarios).filter(item => {
       return item.id !== idProduto;
     }))
+    setValorDesconto(0);
   }
 
   const handleSearchProduto = event => {

@@ -9,7 +9,6 @@ export default function ListaProdutos(props) {
     deletaProduto, 
     loading, 
     setValorTotalCompra, 
-    valorTotalCompra,
     setDisabled, 
     atualizaValorDesconto, 
     setQuantidadeTotal, 
@@ -17,7 +16,8 @@ export default function ListaProdutos(props) {
     handleChangeObservacao,
     itens,
     setValorTotalSemDesc,
-    valorTotalSemDesc
+    valorTotalSemDesc,
+    valorDesconto
   } = props;
   
 
@@ -25,7 +25,7 @@ export default function ListaProdutos(props) {
     () => {
       if(itensUsuarios) calculaValorTotalCompra();
       if(valorTotalSemDesc) atualizaValorDesconto();
-    },[itensUsuarios, valorTotalSemDesc]
+    },[itensUsuarios, valorTotalSemDesc, valorDesconto]
   )
 
   const calculaValorTotalCompra = _ => {
