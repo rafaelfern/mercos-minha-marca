@@ -100,7 +100,7 @@ const HeaderContent = styled.div`
 
 export default function Index(props) {
 
-  const { valorTotalCompra, valorFiltro, handleSearchProduto, valorTotalSemDesc } = props;
+  const { valorFiltro, handleSearchProduto, valorTotalSemDesc } = props;
 
   return (
     <>
@@ -115,7 +115,7 @@ export default function Index(props) {
           <FaMapMarkerAlt/> &nbsp; Bom Retiro - Joinville, SC
         </Row>
         <Row className="logo-content">
-          <img src={imgLogo}/>
+          <img src={imgLogo} className="animate__animated animate__fadeInDown" />
         </Row>
         <Row className="search-bar-content">
           <Col className="links-content">

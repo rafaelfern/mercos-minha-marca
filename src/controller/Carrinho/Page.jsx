@@ -40,8 +40,7 @@ export default function Page(props) {
   return (
     <>
       <Header 
-        valorTotalSemDesc={valorTotalSemDesc}
-        valorTotalCompra={valorTotalCompra} 
+        valorTotalSemDesc={valorTotalSemDesc} 
         valorFiltro={valorFiltro}
         handleSearchProduto={handleSearchProduto}
       />

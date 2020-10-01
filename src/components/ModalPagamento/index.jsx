@@ -42,18 +42,19 @@ const ModalContent = styled.div`
   }
 
   .btn-comprar {
-    background: var(--color-button-comprar);
+    background: var(--color-button);
     width: 140px;
     height: 40px;
-    font: 700 14px Roboto;
-    text-transform: uppercase;
+    font: 700 16px Roboto;
     border: none;
   }
 
 `;
 
 const MensagemSucesso = styled.span`
-  font: 700 19px Poppins; 
+  display: flex;
+  justify-content: center;
+  font: 400 19px Poppins; 
   color: var(--color-button-comprar);
 `;
 
@@ -170,23 +171,23 @@ export default function Index(props) {
             </>
           }
         </ModalBody>
-        <ModalFooter>
-          {
-            (animation)
-            ?
-            <MensagemSucesso>Suas compras foram realizadas com sucesso!</MensagemSucesso>
-            :
+        {
+          (animation)
+          ?
+            <MensagemSucesso>Sua compra foi realizada com sucesso!</MensagemSucesso>
+          :
+          <ModalFooter>
             <Button className="btn-comprar" type="submit" >
               {
                 (loadingSave)
                 ?
-                <Spinner size="sm" color="primary"/>
+                <Spinner size="md" color="primary"/>
                 :
                 <span>Comprar</span>
               }
             </Button>
-          }
-        </ModalFooter>
+          </ModalFooter>
+        }
         </Form>
       </ModalContent>
     </Modal>      

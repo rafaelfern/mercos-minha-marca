@@ -30,11 +30,13 @@ function Controller() {
   const [ itens, setItens ] = useState([]);
   const [ valorFiltro, setValorFiltro ] = useState('');
   const [ animation, setAnimation ] = useState(false);
+  const [ animationVazio, setAnimationVazio ] = useState(false);
 
   useEffect(
     () => {
       getItensUsuario();
       getRegrasDesconto();
+      
     },[valorFiltro]
   )
 
@@ -106,8 +108,8 @@ function Controller() {
 
   const filtraLista = listaFiltrada => {
     let items = listaFiltrada;
-    items = items.filter((item,index) => {
-      return item.nome.toLowerCase().search(valorFiltro.toLowerCase()) !== -1;
+    items = items.filter(item => {
+      return item.nome.toLowerCase().search(valorFiltro.toLowerCase()) !== -1 
     });
     return items;
   }
