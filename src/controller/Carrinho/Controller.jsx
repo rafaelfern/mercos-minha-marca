@@ -142,7 +142,7 @@ function Controller() {
   }
 
   const alteraProdutoQtd = (indexLoop, novaQtd) => {
-    if(novaQtd >= 1){
+    if(novaQtd >= 0){
       setItens({...itens, [indexLoop]: { ...itens[indexLoop], "id": indexLoop+1, "quantidade": novaQtd } });
       setItensUsuarios({...itensUsuarios, [indexLoop]: { ...itensUsuarios[indexLoop], "quantidade": novaQtd }  });
     }
