@@ -17,7 +17,8 @@ export default function ListaProdutos(props) {
     itens,
     setValorTotalSemDesc,
     valorTotalSemDesc,
-    valorDesconto
+    valorDesconto,
+    quantidadeTotal,
   } = props;
   
 
@@ -40,6 +41,8 @@ export default function ListaProdutos(props) {
     })
     
     if(valorTotal === 0) setDisabled(true);
+    if(quantidadeTotal > 0) setDisabled(false)
+    
     setQuantidadeTotal(qtdTotal);
     setValorTotalSemDesc(valorTotal);
     setValorTotalCompra(valorTotal);

@@ -72,6 +72,7 @@ export default function Page(props) {
                 valorTotalCompra={valorTotalCompra}
                 atualizaValorDesconto={atualizaValorDesconto}
                 setQuantidadeTotal={setQuantidadeTotal}
+                quantidadeTotal={quantidadeTotal}
                 adicionaObs={adicionaObs}
                 handleChangeObservacao={handleChangeObservacao}
                 itens={itens}

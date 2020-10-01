@@ -32,11 +32,12 @@ function Controller() {
   const [ animation, setAnimation ] = useState(false);
   const [ animationVazio, setAnimationVazio ] = useState(false);
 
+
+
   useEffect(
     () => {
       getItensUsuario();
       getRegrasDesconto();
-      
     },[valorFiltro]
   )
 
