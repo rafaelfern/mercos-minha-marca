@@ -172,7 +172,7 @@ function Controller() {
 
     let objPost = { itens, endereco, cartao };
     
-    const response = await api. post('/carrinho', objPost);
+    const response = await api.post('/carrinho', objPost);
 
     if(response.data.id){
       setAnimation(true);      
