@@ -12,7 +12,7 @@
 <li>O usuário pode remover um item do carrinho</li>
 <li>O usuário pode escrever uma observação para cada item</li>
 <li>O desconto aplicado é calculado em tempo real, assim como o valor final</li>
-<li>Em caso de múltiplas regras se encaixarem no desconto, é aplicado apenas a regra de maior desconto(atualmente a de quantidade)</li>
+<li>Em caso de múltiplas regras se encaixarem no desconto, é aplicado apenas a regra de maior desconto(atualmente a de quantidade > 50)</li>
 <li>Uma tela final solicitando endereço e número do cartão para pagamento</li>
 <li>Validação dos campos não permitindo deixar nulos e máscara nas informações do cartão!</li>
 </ul>
